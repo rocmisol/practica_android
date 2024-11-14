@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="50dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/eventos_salamanca"
+        android:textSize="22sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/buttonCalendario"
+        android:layout_width="135dp"
+        android:layout_height="40dp"
+        android:text="@string/calendario"
+        android:textSize="14sp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitulo"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Spinner
+        android:id="@+id/SpinnerCategoria"
+        android:layout_width="135dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitulo"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <CheckBox
+        android:id="@+id/checkBoxFavorito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/buttonCalendario"
+        app:layout_constraintTop_toBottomOf="@id/buttonCalendario"/>
+
+    <TextView
+        android:id="@+id/textViewGratuitos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/solo_eventos_gratuitos"
+        android:layout_marginTop="13dp"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxFavorito"
+        app:layout_constraintTop_toBottomOf="@id/buttonCalendario"/>
+
+    <TextView
+        android:id="@+id/textViewFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textviewfecha"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@id/SpinnerCategoria"
+        app:layout_constraintTop_toBottomOf="@id/textViewGratuitos"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewEventos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewFecha"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

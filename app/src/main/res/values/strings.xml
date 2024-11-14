@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Eventos_culturales</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="ver_detalles">Ver detalles</string>
+    <string name="compartir">Compartir</string>
+    <string name="modificar_favorito">Modificar favorito</string>
+    <string name="eventos_salamanca">EVENTOS EN SALAMANCA</string>
+    <string name="calendario">CALENDARIO</string>
+    <string name="solo_eventos_gratuitos">Solo eventos gratuitos</string>
+    <string name="textviewfecha">textViewFecha</string>
+    <string name="fecha">Fecha:</string>
+    <string name="lugar">Lugar:</string>
+    <string name="precio">Precio:</string>
+    <string name="titulo_evento">titulo evento</string>
+    <string name="guardar">GUARDAR</string>
+    <string name="volver">VOLVER</string>
+    <string name="descripcion">Descripción</string>
+    <string name="nombre">Nombre:</string>
+</resources>

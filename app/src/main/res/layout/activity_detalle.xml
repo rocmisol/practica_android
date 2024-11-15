@@ -19,45 +19,59 @@
         android:text="@string/titulo_evento"
         android:textSize="22sp"/>
 
-    <TextView
-        android:id="@+id/textViewFechaEvento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/fecha"
-        android:layout_marginTop="20dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="350dp">
 
-    <ImageView
-        android:id="@+id/imageViewFoto"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="centerCrop"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewLugarEvento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/lugar"
-        android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/textViewFechaEvento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/fecha"
+                android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/textViewPrecioEvento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/precio"
-        android:layout_marginTop="10dp"/>
+            <ImageView
+                android:id="@+id/imageViewFotoEvento"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"/>
 
-    <TextView
-        android:id="@+id/textViewDescripcionEvento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/descripcion"
-        android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/textViewLugarEvento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/lugar"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/textViewPrecioEvento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/precio"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/textViewDescripcionEvento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/descripcion"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -66,7 +80,7 @@
         android:layout_marginTop="10dp"/>
 
     <Switch
-        android:id="@+id/switchFavorito"
+        android:id="@+id/switchFavoritoEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -81,15 +95,16 @@
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/buttonGuardar"
+            android:id="@+id/buttonGuardarEvento"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="@string/guardar"/>
 
         <Button
-            android:id="@+id/buttonVolver"
+            android:id="@+id/buttonVolverEvento"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:text="@string/volver"/>
 
     </LinearLayout>

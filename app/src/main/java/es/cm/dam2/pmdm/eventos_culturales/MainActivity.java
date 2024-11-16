@@ -1,5 +1,6 @@
 package es.cm.dam2.pmdm.eventos_culturales;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -8,8 +9,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,17 +33,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView textViewTitulo, textViewGratuito, textViewFecha;
-    private Button buttonCalendario;
+    private Button buttonFecha;
     private Spinner spinnerCategoria;
     private CheckBox checkBoxGratuito;
     private RecyclerView recyclerViewEventos;
 
     private ArrayList<Evento> listaEventos;
+    private ArrayList<Evento> listaEventosFiltrados;
+    private AdaptadorEvento adaptadorEvento;
     private ActivityResultLauncher<Intent> launcher;
+
+    private String[] categorias = {"Todos", "Escena", "Exposición", "Música"};
+    private String categoriaSelecionada = "Todos";
+    private String fechaSeleccionada = "Todos";
+    private boolean gratuito;
+
     private ListView listViewMenu;
 
 
@@ -57,27 +70,51 @@ public class MainActivity extends AppCompatActivity {
         //Se rellena el ArrayList listaEventos con todos los eventos.
         listaEventos = FuncionRelleno.rellenaEventos();
 
+
         //Configuración de los textView y el checkBox
         textViewTitulo = findViewById(R.id.textViewTituloMain);
         textViewGratuito = findViewById(R.id.textViewGratuitosMain);
         textViewFecha = findViewById(R.id.textViewFechaMain);
 
-        //Configuración del Spinner
+
+        //Configuración del Spinner la selección de categoría
         spinnerCategoria = findViewById(R.id.spinnerCategoriaMain);
-        ///////////////////////////////////////////////////////////////////////////////falta
+        ArrayAdapter<String> adaptadorCategorias = new ArrayAdapter<String>( this, android.R.layout.simple_spinner_item, categorias);
+        spinnerCategoria.setAdapter(adaptadorCategorias);
+
+        spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                categoriaSelecionada = categorias[i];
+                filtrarEventos();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         //Configuración del checkBox
         checkBoxGratuito = findViewById(R.id.checkBoxGratuitoMain);
-        ///////////////////////////////////////////////////////////////////////////////falta
+        checkBoxGratuito.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                filtrarEventos();
+            }
+        });
+
 
         //Configuración del RecyclerView
         recyclerViewEventos = findViewById(R.id.recyclerViewMain);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewEventos.setLayoutManager(linearLayoutManager);
 
+
         //Configuración del adaptador
-        AdaptadorEvento adaptadorEvento = new AdaptadorEvento(listaEventos, this);
+        adaptadorEvento = new AdaptadorEvento(listaEventos, this);
         recyclerViewEventos.setAdapter((adaptadorEvento));
+
 
         //Configuración del launcher para gestionar el flujo de datos entre la MainActivity y la DetalleActivity
         launcher = registerForActivityResult(
@@ -95,21 +132,68 @@ public class MainActivity extends AppCompatActivity {
         );
 
 
-
-        //Configuración del botón para seleccionar la fecha
-        buttonCalendario = findViewById(R.id.buttonCalendarioMain);
-        buttonCalendario.setOnClickListener(new View.OnClickListener() {
+        //Configuración del botón que abrirá un DatePickerDialog para seleccionar la fecha
+        buttonFecha = findViewById(R.id.buttonCalendarioMain);
+        buttonFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            ////////////////////////////////////////////////////////////////////falta
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        MainActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                                fechaSeleccionada = String.format("%02d/%02d/%04d", dayOfMonth, month, year);
+                                textViewFecha.setText(fechaSeleccionada);
+                                filtrarEventos();
+                            }
+                        },
+                        year, month, day);
+                datePickerDialog.show();
             }
         });
-
 
 
         //Se registra el listViewMenu para que pueda utilizar el menú contextual
         registerForContextMenu(listViewMenu);
 
+
+
+    }
+
+    //Método para filtrar los eventos según su categoría, fecha seleccionada y si son gratuitos o no
+    public void filtrarEventos(){
+        categoriaSelecionada = spinnerCategoria.getSelectedItem().toString();
+        fechaSeleccionada = buttonFecha.getText().toString();
+        gratuito = checkBoxGratuito.isChecked();
+
+        //Lista temporal para almacenar los eventos que cumplen con los filtros seleccionados
+        listaEventosFiltrados = new ArrayList<>();
+
+        //Se recorre la lista de Eventos y se aplican los filtros
+        for (Evento evento : listaEventos){
+            //Si la categoría es todos, todos los eventos pasarán el filtro
+            //Si no, comprueba si la categoría coincide con la categoría seleccionada
+            boolean coincideCategoria = categoriaSelecionada.equals("Todos") ||
+                    evento.getCategoria().equalsIgnoreCase(categoriaSelecionada);
+            //Si no se establece fecha, todos todos los eventos pasarán el filtro.
+            //Si se establece fecha, comprueba si la fecha coincide con la fecha selecionada
+            boolean coincideFecha = fechaSeleccionada.equalsIgnoreCase("Todos") ||
+                    evento.getFecha().equals(fechaSeleccionada);
+            //Si el checkBox no está marcado todos los eventos pasaran el filtro gratuito
+            //Si el checkbox está marcado solo pasarán el filtro los que tengan el precio "GRATUITO"
+            boolean coincideGratuito = !gratuito || evento.getPrecio().equalsIgnoreCase("GRATUITO");
+
+            //Si el evento cumple con todos los filtros activos, se añade a la lista temporal
+            if (coincideCategoria && coincideFecha && coincideGratuito){
+                listaEventosFiltrados.add(evento);
+            }
+        }
+        //Falta actualizar el adaptador///////////////////////////////////////////////////////////////////////////////////////
 
 
     }

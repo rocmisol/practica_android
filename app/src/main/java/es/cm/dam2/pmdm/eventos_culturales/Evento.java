@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Evento implements Serializable {
     String nombre;
     String fecha;
-    String clase;
+    String categoria;
     int imagen;
     String lugar;
     String descripcion;
@@ -18,7 +18,7 @@ public class Evento implements Serializable {
     public Evento(String nombre, String fecha, String clase, int imagen, String lugar, String descripcion, String precio, boolean favorito, float valoracion, String hora) {
         this.nombre = nombre;
         this.fecha = fecha;
-        this.clase = clase;
+        this.categoria = clase;
         this.imagen = imagen;
         this.lugar = lugar;
         this.descripcion = descripcion;
@@ -44,12 +44,12 @@ public class Evento implements Serializable {
         this.fecha = fecha;
     }
 
-    public String getClase() {
-        return clase;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setClase(String clase) {
-        this.clase = clase;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public int getImagen() {
@@ -121,7 +121,7 @@ public class Evento implements Serializable {
         return "Evento{" +
                 "nombre='" + nombre + '\'' +
                 ", fecha='" + fecha + '\'' +
-                ", clase='" + clase + '\'' +
+                ", clase='" + categoria + '\'' +
                 ", imagen=" + imagen +
                 ", lugar='" + lugar + '\'' +
                 ", descripcion='" + descripcion + '\'' +

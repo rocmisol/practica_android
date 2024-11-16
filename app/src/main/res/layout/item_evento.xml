@@ -8,7 +8,7 @@
     
 
     <ImageView
-        android:id="@+id/imageViewFotomini"
+        android:id="@+id/imageViewItemFotomini"
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:scaleType="centerCrop"
@@ -19,20 +19,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/imageViewFotomini"
+        app:layout_constraintStart_toEndOf="@+id/imageViewItemFotomini"
         android:layout_marginStart="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/textViewNombre"
+            android:id="@+id/textViewItemNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nombre"
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/textViewFecha"
+            android:id="@+id/textViewItemFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fecha"
@@ -41,7 +41,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageViewFavorito"
+        android:id="@+id/imageViewItemFavorito"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="15dp"

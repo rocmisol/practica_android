@@ -10,7 +10,7 @@
     tools:context=".DetalleActivity">
 
     <TextView
-        android:id="@+id/textViewTituloEvento"
+        android:id="@+id/textViewTituloDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -29,7 +29,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewFechaEvento"
+                android:id="@+id/textViewFechaDetalle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -37,7 +37,7 @@
                 android:layout_marginTop="20dp"/>
 
             <ImageView
-                android:id="@+id/imageViewFotoEvento"
+                android:id="@+id/imageViewFotoDetalle"
                 android:layout_width="200dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="20dp"
@@ -45,7 +45,7 @@
                 android:scaleType="centerCrop"/>
 
             <TextView
-                android:id="@+id/textViewLugarEvento"
+                android:id="@+id/textViewLugarDetalle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -53,7 +53,7 @@
                 android:layout_marginTop="10dp"/>
 
             <TextView
-                android:id="@+id/textViewPrecioEvento"
+                android:id="@+id/textViewPrecioDetalle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -61,7 +61,7 @@
                 android:layout_marginTop="10dp"/>
 
             <TextView
-                android:id="@+id/textViewDescripcionEvento"
+                android:id="@+id/textViewDescripcionDetalle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -74,13 +74,14 @@
 
 
     <RatingBar
+        android:id="@+id/ratingBarDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"/>
 
     <Switch
-        android:id="@+id/switchFavoritoEvento"
+        android:id="@+id/switchFavoritoDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -95,13 +96,13 @@
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/buttonGuardarEvento"
+            android:id="@+id/buttonGuardarDetalle"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="@string/guardar"/>
 
         <Button
-            android:id="@+id/buttonVolverEvento"
+            android:id="@+id/buttonVolverDetalle"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"

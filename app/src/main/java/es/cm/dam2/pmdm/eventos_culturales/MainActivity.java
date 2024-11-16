@@ -7,7 +7,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -15,10 +19,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TextView textViewTitulo, textViewGratuito, textViewFecha;
+    private Button buttonCalendario;
+    private Spinner spinnerCategoria;
+    private CheckBox checkBoxGratuito;
+    private RecyclerView recyclerViewMain;
 
     private ArrayList<Evento> listaEventos;
     private ListView listViewMenu;
@@ -56,10 +67,9 @@ public class MainActivity extends AppCompatActivity {
     //Selección de la acción del menú de opciones
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id =item.getItemId();
-        if (id == R.id.favoritos){
-        Intent intent = new Intent (MainActivity.this, Favoritos.class);
-        //Falta launcher///////////////////////////////////////////////////////////////////////////////////////////////////
+        if (item.getItemId() == R.id.favoritos){
+            Intent intent = new Intent (MainActivity.this, Favoritos.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -75,6 +85,29 @@ public class MainActivity extends AppCompatActivity {
     //Selección de la acción del menú contextual (ver detalles, compartir y modificar favorito)
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.verDetalles){
+            //LLeva a la activity DetalleActivity para ver los detalles del evento.
+            Intent intent = new Intent(MainActivity.this, DetalleActivity.class);
+            intent.putExtra("");
+            //////////////////////////////////////////////////////////////////////////////////////Launcher
+
+
+
+        }
+
+        if(id == R.id.compartir){
+            ///////////////////////intent implicita
+        }
+
+        if(id == R.id.modificarFavorito){
+
+        }
+
         return super.onContextItemSelected(item);
+
+
+
     }
 }

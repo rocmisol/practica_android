@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/detalles" android:title="@string/ver_detalles"></item>
+    <item android:id="@+id/verDetalles" android:title="@string/ver_detalles"></item>
     <item android:id="@+id/compartir" android:title="@string/compartir"></item>
-    <item android:id="@+id/modificar_favorito" android:title="@string/modificar_favorito"></item>
+    <item android:id="@+id/modificarFavorito" android:title="@string/modificar_favorito"></item>
 </menu>

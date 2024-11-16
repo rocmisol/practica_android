@@ -16,4 +16,6 @@
     <string name="volver">VOLVER</string>
     <string name="descripcion">Descripción</string>
     <string name="nombre">Nombre:</string>
+    <string name="elige_aplicacion">Compartir...</string>
+
 </resources>

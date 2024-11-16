@@ -60,7 +60,7 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Miview
         holder.itemFecha.setText(evento.getFecha());
         holder.itemFotoMini.setImageResource(evento.getImagen());
         holder.itemFotoFavorito.setImageResource(
-                evento.isFavorito()? R.drawable.maspequelleno : R.drawable.maspequevacio);
+                evento.isFavorito()? R.drawable.corazon_lleno : R.drawable.corazon_vacio);
     }
 
     @Override

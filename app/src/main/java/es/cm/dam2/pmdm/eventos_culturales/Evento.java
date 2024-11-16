@@ -1,6 +1,8 @@
 package es.cm.dam2.pmdm.eventos_culturales;
 
-public class Evento {
+import java.io.Serializable;
+
+public class Evento implements Serializable {
     String nombre;
     String fecha;
     String clase;

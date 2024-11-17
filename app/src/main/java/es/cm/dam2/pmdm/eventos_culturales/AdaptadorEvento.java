@@ -2,7 +2,9 @@ package es.cm.dam2.pmdm.eventos_culturales;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,18 +14,20 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.MiviewHolder> {
     private ArrayList<Evento> eventos;
     private Context context;
+    private int posicionSeleccionada;
 
     public AdaptadorEvento(ArrayList<Evento> eventos, Context context) {
         this.eventos = eventos;
         this.context = context;
     }
 
-    public class MiviewHolder extends RecyclerView.ViewHolder{
+    public class MiviewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
         public TextView itemNombre;
         public TextView itemFecha;
         public ImageView itemFotoMini;
@@ -32,10 +36,21 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Miview
 
         public MiviewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnCreateContextMenuListener(this);
             itemNombre = itemView.findViewById(R.id.textViewItemNombre);
             itemFecha = itemView.findViewById(R.id.textViewItemFecha);
             itemFotoMini = itemView.findViewById(R.id.imageViewItemFotomini);
             itemFotoFavorito = itemView.findViewById(R.id.imageViewItemFavorito);
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            // Se infla el menú contextual
+            MenuInflater inflater = ((MainActivity) context).getMenuInflater();
+            inflater.inflate(R.menu.menu_contextual, contextMenu);
+
+            // Se asocian las acciones al elemento seleccionado
+            contextMenu.setHeaderTitle("Selecciona una opción");
         }
     }
 
@@ -49,6 +64,7 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Miview
 
     @Override
     public void onBindViewHolder(@NonNull AdaptadorEvento.MiviewHolder holder, int position) {
+
         if (position % 2 ==0){
             holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.violet1));
 
@@ -61,10 +77,31 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Miview
         holder.itemFotoMini.setImageResource(evento.getImagen());
         holder.itemFotoFavorito.setImageResource(
                 evento.isFavorito()? R.drawable.corazon_lleno : R.drawable.corazon_vacio);
+
+        //Se configura un clic largo para abrir el mení contextual
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                posicionSeleccionada = position; //Guarda la posició seleccionada
+                return false;
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return eventos.size();
     }
+
+    //Método para manejar la lista de eventos filtrada
+    public void actualizarListaFiltradoEventos (ArrayList<Evento> eventosFiltrados ){
+        this.eventos = eventosFiltrados; //Se actualiza la lista interna del adaptador
+        notifyDataSetChanged();//Notifica al Recyclerview para refrescar la vista
+    }
+
+    public int getPosicionSeleccionada(){
+        return posicionSeleccionada;
+    }
+
+
 }

@@ -37,7 +37,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textViewTitulo, textViewGratuito, textViewFecha;
+    private TextView textViewTitulo, textViewFecha;
     private Button buttonFecha;
     private Spinner spinnerCategoria;
     private CheckBox checkBoxGratuito;
@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
     private String categoriaSelecionada = "Todos";
     private String fechaSeleccionada = "Todos";
     private boolean gratuito;
-
-    private ListView listViewMenu;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +68,8 @@ public class MainActivity extends AppCompatActivity {
         listaEventos = FuncionRelleno.rellenaEventos();
 
 
-        //Configuración de los textView y el checkBox
+        //Configuración de los textView
         textViewTitulo = findViewById(R.id.textViewTituloMain);
-        textViewGratuito = findViewById(R.id.textViewGratuitosMain);
         textViewFecha = findViewById(R.id.textViewFechaMain);
 
 
@@ -147,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                                fechaSeleccionada = String.format("%02d/%02d/%04d", dayOfMonth, month, year);
+                                fechaSeleccionada = String.format("%02d/%02d/%04d", dayOfMonth, (month+1), year);
                                 textViewFecha.setText(fechaSeleccionada);
                                 filtrarEventos();
                             }
@@ -158,8 +154,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //Se registra el listViewMenu para que pueda utilizar el menú contextual
-        registerForContextMenu(listViewMenu);
+        //Se registra el recyclerView para que pueda utilizar el menú contextual
+        // registerForContextMenu(recyclerViewEventos);
 
 
 
@@ -168,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     //Método para filtrar los eventos según su categoría, fecha seleccionada y si son gratuitos o no
     public void filtrarEventos(){
         categoriaSelecionada = spinnerCategoria.getSelectedItem().toString();
-        fechaSeleccionada = buttonFecha.getText().toString();
+        fechaSeleccionada = textViewFecha.getText().toString();
         gratuito = checkBoxGratuito.isChecked();
 
         //Lista temporal para almacenar los eventos que cumplen con los filtros seleccionados
@@ -180,9 +176,9 @@ public class MainActivity extends AppCompatActivity {
             //Si no, comprueba si la categoría coincide con la categoría seleccionada
             boolean coincideCategoria = categoriaSelecionada.equals("Todos") ||
                     evento.getCategoria().equalsIgnoreCase(categoriaSelecionada);
-            //Si no se establece fecha, todos todos los eventos pasarán el filtro.
+            //Si no se establece fecha, todos los eventos pasarán el filtro.
             //Si se establece fecha, comprueba si la fecha coincide con la fecha selecionada
-            boolean coincideFecha = fechaSeleccionada.equalsIgnoreCase("Todos") ||
+            boolean coincideFecha = fechaSeleccionada.equalsIgnoreCase("") ||
                     evento.getFecha().equals(fechaSeleccionada);
             //Si el checkBox no está marcado todos los eventos pasaran el filtro gratuito
             //Si el checkbox está marcado solo pasarán el filtro los que tengan el precio "GRATUITO"
@@ -193,9 +189,8 @@ public class MainActivity extends AppCompatActivity {
                 listaEventosFiltrados.add(evento);
             }
         }
-        //Falta actualizar el adaptador///////////////////////////////////////////////////////////////////////////////////////
-
-
+        //Se actualiza el adaptador del Recycler con los eventos filtrados
+        adaptadorEvento.actualizarListaFiltradoEventos(listaEventosFiltrados);
     }
 
     //Se agrega el menú de opciones
@@ -228,8 +223,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         //Uso del adaptador creado para acceder a los datos del objeto evento.
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
-        int position = info.position;
+        //Ya no sirve: AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        int position = adaptadorEvento.getPosicionSeleccionada();
         Evento eventoSeleccionado = listaEventos.get(position);
 
         int id = item.getItemId();
@@ -243,11 +238,16 @@ public class MainActivity extends AppCompatActivity {
 
         if(id == R.id.compartir){
             //Utiliza una aplicación de nuestro dispositivo para enviar información del evento.
-            String nombreEvento = textViewTitulo.getText().toString();
-            String fechaEvento = textViewFecha.getText().toString();
+            String nombreEvento = eventoSeleccionado.nombre;
+            String fechaEvento = eventoSeleccionado.fecha;
+            String lugarEvento = eventoSeleccionado.lugar;
+            String precioEvento = eventoSeleccionado.precio;
+            String descripcionEvento = eventoSeleccionado.descripcion;
 
             //Mensaje que aparecerá al enviar la información.
-            String mensaje ="¡Mira este evento!\n" + nombreEvento + "\n" + fechaEvento;
+            String mensaje ="¡Mira este evento!\n" + nombreEvento + "\n" + "Fecha: " + fechaEvento
+                    + "\n" + "Lugar: " + lugarEvento + "\nPrecio: " + precioEvento + "\nDescripción:\n"
+                    + descripcionEvento;
 
             //Creación de un intent implicito y un selector de apliaciones disponibles
             Intent intent = new Intent(Intent.ACTION_SEND);
@@ -263,15 +263,18 @@ public class MainActivity extends AppCompatActivity {
                 //Si no hay ningún aplicación que pueda manjear el intent se muestra un mensaje
                 Toast.makeText(this, "No hay ninguna aplicación instalada para enviar este mensaje", Toast.LENGTH_LONG).show();
             }
+            return true;
         }
 
         if(id == R.id.modificarFavorito){
-        ////////////////////////////////////////////////////////////////////////////////////////////////Falta
+        //Se cambia el estado de favorito del evento
+            boolean estadoFavorito = !eventoSeleccionado.isFavorito();//Se invierte el estado actual
+            eventoSeleccionado.setFavorito(estadoFavorito);
+
+            adaptadorEvento.notifyItemChanged(position);//Se notifica al adaptador que el evento ha cambiado
+            return true;
         }
-
         return super.onContextItemSelected(item);
-
-
 
     }
 }

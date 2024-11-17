@@ -42,26 +42,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"
-        app:layout_constraintStart_toStartOf="@id/buttonCalendarioMain"
-        app:layout_constraintTop_toBottomOf="@id/buttonCalendarioMain"/>
-
-    <TextView
-        android:id="@+id/textViewGratuitosMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/solo_eventos_gratuitos"
-        android:layout_marginTop="13dp"
-        app:layout_constraintStart_toEndOf="@+id/checkBoxGratuitoMain"
+        app:layout_constraintStart_toStartOf="@id/buttonCalendarioMain"
         app:layout_constraintTop_toBottomOf="@id/buttonCalendarioMain"/>
 
     <TextView
         android:id="@+id/textViewFechaMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textviewfecha"
+        android:text=""
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@id/spinnerCategoriaMain"
-        app:layout_constraintTop_toBottomOf="@id/textViewGratuitosMain"/>
+        app:layout_constraintTop_toBottomOf="@id/checkBoxGratuitoMain"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMain"
@@ -70,7 +62,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewItemFecha"/>
+        app:layout_constraintTop_toBottomOf="@id/textViewFechaMain"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

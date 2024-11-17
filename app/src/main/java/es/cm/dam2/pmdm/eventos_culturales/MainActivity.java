@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,9 +118,23 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == RESULT_OK && result.getData() != null){
-                            Intent datos = result.getData();
-                            Evento evento = (Evento)datos.getSerializableExtra("evento");
-                            listaEventos.add(evento);
+                            //Intent datos = result.getData();
+                            //Evento evento = (Evento)datos.getSerializableExtra("eventoModificado");
+                            //listaEventos.add(evento);
+                            //filtrarEventos();
+
+                            Evento eventoModificado = (Evento) result.getData().getSerializableExtra("eventoModificado");
+                            if (eventoModificado != null){
+                                //Bucle para buscar la posición del evento modificado
+                                for (int i = 0; i< listaEventos.size(); i++){
+                                    Evento eventoBuscado = listaEventos.get(i);
+                                    //Si encuentra el evento lo sustituye en la lista original
+                                    if (eventoBuscado.getNombre().equalsIgnoreCase(eventoModificado.getNombre())){
+                                        listaEventos.set(i, eventoModificado);
+                                        filtrarEventos();
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -153,11 +166,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        //Se registra el recyclerView para que pueda utilizar el menú contextual
+        // Como es un recyclerView ya no se puede utilizar
         // registerForContextMenu(recyclerViewEventos);
-
-
 
     }
 
@@ -189,6 +199,8 @@ public class MainActivity extends AppCompatActivity {
                 listaEventosFiltrados.add(evento);
             }
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Si lista filtrado vacía mostrar dialogo
+
         //Se actualiza el adaptador del Recycler con los eventos filtrados
         adaptadorEvento.actualizarListaFiltradoEventos(listaEventosFiltrados);
     }
@@ -205,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.favoritos){
-            Intent intent = new Intent (MainActivity.this, Favoritos.class);
+            Intent intent = new Intent (MainActivity.this, FavoritosActivity.class);
             startActivity(intent);
             return true;
         }

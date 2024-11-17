@@ -17,7 +17,8 @@
         android:textAllCaps="true"
         android:layout_marginTop="20dp"
         android:text="@string/titulo_evento"
-        android:textSize="22sp"/>
+        android:textSize="22sp"
+        android:textStyle="bold"/>
 
     <ScrollView
         android:layout_width="match_parent"

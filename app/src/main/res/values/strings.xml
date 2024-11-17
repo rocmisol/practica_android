@@ -17,5 +17,9 @@
     <string name="descripcion">Descripción</string>
     <string name="nombre">Nombre:</string>
     <string name="elige_aplicacion">Compartir...</string>
+    <string name="eventos_favoritos">EVENTOS FAVORITOS</string>
+    <string name="notas">Notas:</string>
+    <string name="escribe_tus_notas_aqu">Escribe tus notas aquí</string>
+
 
 </resources>

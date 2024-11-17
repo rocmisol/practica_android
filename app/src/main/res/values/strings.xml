@@ -20,6 +20,7 @@
     <string name="eventos_favoritos">EVENTOS FAVORITOS</string>
     <string name="notas">Notas:</string>
     <string name="escribe_tus_notas_aqu">Escribe tus notas aquí</string>
+    <string name="guardar_notas">GUARDAR NOTAS</string>
 
 
 </resources>

@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Evento> listaEventos;
     private ArrayList<Evento> listaEventosFiltrados;
+    private ArrayList<Evento> listaEventosFavoritos;
     private AdaptadorEvento adaptadorEvento;
     private ActivityResultLauncher<Intent> launcher;
 
@@ -217,7 +218,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.favoritos){
+            //Se llama al método obtenerEventosFavoritos para actualizar la lista de eventos favoritos
+            obtenerEventosFavoritos();
+            //Se crea objeto serializable con la lista de favoritos para pasalo por el intent
+            ListaPasarEventosFavoritos listaPasarEventosFavoritos = new ListaPasarEventosFavoritos(listaEventosFavoritos);
             Intent intent = new Intent (MainActivity.this, FavoritosActivity.class);
+            intent.putExtra("listaFavoritos", listaPasarEventosFavoritos);
             startActivity(intent);
             return true;
         }
@@ -282,11 +288,20 @@ public class MainActivity extends AppCompatActivity {
         //Se cambia el estado de favorito del evento
             boolean estadoFavorito = !eventoSeleccionado.isFavorito();//Se invierte el estado actual
             eventoSeleccionado.setFavorito(estadoFavorito);
-
             adaptadorEvento.notifyItemChanged(position);//Se notifica al adaptador que el evento ha cambiado
             return true;
         }
         return super.onContextItemSelected(item);
 
+    }
+
+    //Método para obtener los eventos favoritos de la lista de eventos principal
+    private void obtenerEventosFavoritos(){
+        listaEventosFavoritos = new ArrayList<>();
+        for (Evento evento : listaEventos){
+            if (evento.isFavorito()){
+                listaEventosFavoritos.add(evento);
+            }
+        }
     }
 }

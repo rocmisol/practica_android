@@ -93,9 +93,6 @@ public class FavoritosActivity extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
     //Método para guardar las notas utilizando SharedPreferences (de manera persistene)

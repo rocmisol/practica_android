@@ -266,8 +266,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         //Uso del adaptador creado para acceder a los datos del objeto evento.
         //Ya no sirve: AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+
+        //La posición que se necesita es la de la lista filtrada, no la de la completa
         int position = adaptadorEvento.getPosicionSeleccionada();
-        Evento eventoSeleccionado = listaEventos.get(position);
+        Evento eventoSeleccionado = listaEventosFiltrados.get(position);
 
         int id = item.getItemId();
         if (id == R.id.verDetalles){
@@ -279,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(id == R.id.compartir){
-            //Utiliza una aplicación de nuestro dispositivo para enviar información del evento.
+            //Se utiliza una aplicación de nuestro dispositivo para enviar información del evento.
             String nombreEvento = eventoSeleccionado.nombre;
             String fechaEvento = eventoSeleccionado.fecha;
             String lugarEvento = eventoSeleccionado.lugar;
@@ -287,9 +289,10 @@ public class MainActivity extends AppCompatActivity {
             String descripcionEvento = eventoSeleccionado.descripcion;
 
             //Mensaje que aparecerá al enviar la información.
-            String mensaje ="¡Mira este evento!\n" + nombreEvento + "\n" + "Fecha: " + fechaEvento
-                    + "\n" + "Lugar: " + lugarEvento + "\nPrecio: " + precioEvento + "\nDescripción:\n"
-                    + descripcionEvento;
+            String mensaje =getString(R.string.mira_este_evento) + "\n" + nombreEvento + "\n" +
+                    getString(R.string.fecha) + fechaEvento + "\n" + getString(R.string.lugar) +
+                    lugarEvento + "\n" + getString(R.string.precio) + precioEvento + "\n" +
+                    getString(R.string.descripcion) +"\n" + descripcionEvento;
 
             //Creación de un intent implicito y un selector de apliaciones disponibles
             Intent intent = new Intent(Intent.ACTION_SEND);
@@ -303,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 //Si no hay ninguna aplicación que pueda manjear el intent se muestra un mensaje
-                Toast.makeText(this, "No hay ninguna aplicación instalada para enviar este mensaje", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.no_hay_aplicacion_instalada, Toast.LENGTH_LONG).show();
             }
             return true;
         }

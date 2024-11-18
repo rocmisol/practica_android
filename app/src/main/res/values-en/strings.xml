@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Cultural Events</string>
+    <string name="app_name">Cultural Events in Salamanca</string>
     <string name="favoritos">Favorites</string>
     <string name="ver_detalles">View details</string>
     <string name="compartir">Share</string>
@@ -9,13 +9,26 @@
     <string name="calendario">CALENDAR</string>
     <string name="solo_eventos_gratuitos">Only free events</string>
     <string name="textviewfecha">textViewDate</string>
-    <string name="fecha">Date:</string>
-    <string name="lugar">Location:</string>
-    <string name="precio">Price:</string>
+    <string name="fecha">Date: </string>
+    <string name="lugar">Location: </string>
+    <string name="precio">Price: </string>
     <string name="titulo_evento">Event title</string>
     <string name="guardar">SAVE</string>
     <string name="volver">BACK</string>
-    <string name="descripcion">Description</string>
-    <string name="nombre">Name:</string>
+    <string name="descripcion">Description: </string>
+    <string name="nombre">Name: </string>
     <string name="elige_aplicacion">Share...</string>
+    <string name="eventos_favoritos">FAVORITE EVENTS</string>
+    <string name="notas">Notes: </string>
+    <string name="escribe_tus_notas_aqu">Write your notes here</string>
+    <string name="guardar_notas">SAVE</string>
+    <string name="tituloDialog">No results</string>
+    <string name="mensajeDialog">There are no events matching the selected filters</string>
+    <string name="botonAceptarDialog">Accept</string>
+    <string name="aniadir_a_calendario">Add to calendar</string>
+    <string name="no_aniadido_evento">The event could not be added</string>
+    <string name="permiso_denegado_al_calendario">Permission denied to access the calendar</string>
+    <string name="mira_este_evento">Check out this event!</string>
+    <string name="no_hay_aplicacion_instalada">There is no application installed to send this message</string>
+    <string name="evento_aniadido_al_calendario">Event added to the calendar</string>
 </resources>

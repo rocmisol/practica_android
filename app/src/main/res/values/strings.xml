@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Eventos_culturales</string>
+    <string name="app_name">Eventos Culturales en Salamanca</string>
     <string name="favoritos">Favoritos</string>
     <string name="ver_detalles">Ver detalles</string>
     <string name="compartir">Compartir</string>
@@ -8,22 +8,26 @@
     <string name="calendario">CALENDARIO</string>
     <string name="solo_eventos_gratuitos">Solo eventos gratuitos</string>
     <string name="textviewfecha">textViewFecha</string>
-    <string name="fecha">Fecha:</string>
-    <string name="lugar">Lugar:</string>
-    <string name="precio">Precio:</string>
+    <string name="fecha">Fecha: </string>
+    <string name="lugar">Lugar: </string>
+    <string name="precio">Precio: </string>
     <string name="titulo_evento">titulo evento</string>
     <string name="guardar">GUARDAR</string>
     <string name="volver">VOLVER</string>
-    <string name="descripcion">Descripción</string>
-    <string name="nombre">Nombre:</string>
+    <string name="descripcion">Descripción: </string>
+    <string name="nombre">Nombre: </string>
     <string name="elige_aplicacion">Compartir...</string>
     <string name="eventos_favoritos">EVENTOS FAVORITOS</string>
-    <string name="notas">Notas:</string>
+    <string name="notas">Notas: </string>
     <string name="escribe_tus_notas_aqu">Escribe tus notas aquí</string>
     <string name="guardar_notas">GUARDAR</string>
     <string name="tituloDialog">Sin reultados</string>
     <string name="mensajeDialog">No hay eventos que coincidan con los filtros seleccionados</string>
     <string name="botonAceptarDialog">Aceptar</string>
-
-
+    <string name="aniadir_a_calendario">Añadir a calendario</string>
+    <string name="no_aniadido_evento">No se ha podido añadir el evento</string>
+    <string name="permiso_denegado_al_calendario">Permiso denegado para acceder al calendario</string>
+    <string name="mira_este_evento">¡Mira este evento!</string>
+    <string name="no_hay_aplicacion_instalada">No hay ninguna aplicación instalada para enviar este mensaje</string>
+    <string name="evento_aniadido_al_calendario">Evento añadido al calendario</string>
 </resources>

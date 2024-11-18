@@ -20,7 +20,10 @@
     <string name="eventos_favoritos">EVENTOS FAVORITOS</string>
     <string name="notas">Notas:</string>
     <string name="escribe_tus_notas_aqu">Escribe tus notas aquí</string>
-    <string name="guardar_notas">GUARDAR NOTAS</string>
+    <string name="guardar_notas">GUARDAR</string>
+    <string name="tituloDialog">Sin reultados</string>
+    <string name="mensajeDialog">No hay eventos que coincidan con los filtros seleccionados</string>
+    <string name="botonAceptarDialog">Aceptar</string>
 
 
 </resources>

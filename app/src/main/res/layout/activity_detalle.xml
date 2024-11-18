@@ -6,28 +6,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="50dp"
+    android:layout_margin="20dp"
+    android:weightSum="100"
     tools:context=".DetalleActivity">
-
-    <TextView
-        android:id="@+id/textViewTituloDetalle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textAllCaps="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/titulo_evento"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="350dp">
+        android:layout_height="0dp"
+        android:layout_weight="85">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTituloDetalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAllCaps="true"
+                android:layout_marginTop="20dp"
+                android:text="@string/titulo_evento"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/textViewFechaDetalle"
@@ -67,35 +69,41 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/descripcion"
+                android:justificationMode="inter_word"
                 android:layout_marginTop="10dp"/>
+
+            <RatingBar
+                android:id="@+id/ratingBarDetalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:stepSize="0.5"
+                android:layout_marginTop="10dp"/>
+
+
 
         </LinearLayout>
 
     </ScrollView>
 
-
-    <RatingBar
-        android:id="@+id/ratingBarDetalle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:stepSize="0.5"
-        android:layout_marginTop="10dp"/>
-
     <Switch
         android:id="@+id/switchFavoritoDetalle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="5"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         tools:ignore="UseSwitchCompatOrMaterialXml"/>
+    
+
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="10"
         android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp">
+        android:gravity="center_vertical"
+        android:layout_gravity="center_horizontal">
 
         <Button
             android:id="@+id/buttonGuardarDetalle"

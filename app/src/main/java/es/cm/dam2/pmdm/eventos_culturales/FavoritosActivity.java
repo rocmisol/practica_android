@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 public class FavoritosActivity extends AppCompatActivity {
 
     private TextView textViewTituloFavoritos, textViewNotasFavoritos;
-    private ProgressBar progressBarFavoritos;
+
     private RecyclerView recyclerViewFavoritos;
     EditText editTextNotasFavoritos;
     Button buttonGuardarFavoritos, buttonVolverFavoritos;
@@ -52,7 +51,7 @@ public class FavoritosActivity extends AppCompatActivity {
         //Vinculación con las vistas de los textView
         textViewTituloFavoritos = findViewById(R.id.textViewTituloFavoritos);
         textViewNotasFavoritos = findViewById(R.id.textViewNotasFavoritos);
-        progressBarFavoritos = findViewById(R.id.progressBarFavoritos);
+
         recyclerViewFavoritos = findViewById(R.id.recyclerViewFavoritos);
         editTextNotasFavoritos = findViewById(R.id.editTextNotasFavoritos);
 
@@ -66,10 +65,6 @@ public class FavoritosActivity extends AppCompatActivity {
         adaptadorEvento = new AdaptadorEvento(listaPasarEventosFavoritos.getListaEventosFavoritos(), this);
         recyclerViewFavoritos.setAdapter((adaptadorEvento));
 
-
-        //Se muestra el progressBar durante la carga de esta Activity
-        mostrarProgressBar();
-
         //Se recuperan los eventos favoritos
 
         //Se cargan las anotaciones guardadas
@@ -77,15 +72,7 @@ public class FavoritosActivity extends AppCompatActivity {
         String notasGuardadas = sharedPreferences.getString(NOTAS_KEY, ""); //"" es el valor por defecto
         editTextNotasFavoritos.setText(notasGuardadas); //Se muestran las notas guardadas en el editText
 
-        //Se simula una carga con retraso de 2 segundos
-        //https://developer.android.com/reference/android/os/Handler
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                recyclerViewFavoritos.setAdapter(adaptadorEvento);
-                ocultarProgressBar();
-            }
-        }, 2000);
+
 
         //Se configura el botón para guardar las notas
         buttonGuardarFavoritos = findViewById(R.id.buttonGuardarFavoritos);
@@ -109,16 +96,6 @@ public class FavoritosActivity extends AppCompatActivity {
 
 
 
-    }
-    //Método para mostrar el ProgressBar
-    private void mostrarProgressBar(){
-        progressBarFavoritos.setVisibility(View.VISIBLE);
-        progressBarFavoritos.setVisibility(View.GONE);
-    }
-
-    //Método para ocultar el ProgressBar
-    private void ocultarProgressBar(){
-        progressBarFavoritos.setVisibility(View.GONE);
     }
 
     //Método para guardar las notas utilizando SharedPreferences (de manera persistene)

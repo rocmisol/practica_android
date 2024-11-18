@@ -2,7 +2,9 @@ package es.cm.dam2.pmdm.eventos_culturales;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,11 +39,12 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textViewTitulo, textViewFecha;
+    private TextView textViewFecha;
     private Button buttonFecha;
     private Spinner spinnerCategoria;
     private CheckBox checkBoxGratuito;
     private RecyclerView recyclerViewEventos;
+    private ProgressBar progressBarMain;
 
     private ArrayList<Evento> listaEventos;
     private ArrayList<Evento> listaEventosFiltrados;
@@ -68,9 +72,11 @@ public class MainActivity extends AppCompatActivity {
         listaEventos = FuncionRelleno.rellenaEventos();
 
 
-        //Configuración de los textView
-        textViewTitulo = findViewById(R.id.textViewTituloMain);
+        //Configuración del textView
         textViewFecha = findViewById(R.id.textViewFechaMain);
+
+        //Se asocia la vista al objeto
+        progressBarMain = findViewById(R.id.progressBarMain);
 
 
         //Configuración del Spinner la selección de categoría
@@ -200,10 +206,28 @@ public class MainActivity extends AppCompatActivity {
                 listaEventosFiltrados.add(evento);
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Si lista filtrado vacía mostrar dialogo
+        //Si al filtrar la lista no contiene eventos, se muestra un DialogFragment y se vuelven a mostrar todos los eventos
+        if (listaEventosFiltrados.isEmpty()){
+            DialogoListaVacia dialogoListaVacia = new DialogoListaVacia();
+            dialogoListaVacia.show(getSupportFragmentManager(), "DialogoListaVacia");
+            fechaSeleccionada = "";
+            textViewFecha.setText("");
+            filtrarEventos(); // Se vuelve a actualizar la lista filtrada
+        }
 
         //Se actualiza el adaptador del Recycler con los eventos filtrados
-        adaptadorEvento.actualizarListaFiltradoEventos(listaEventosFiltrados);
+        //Se simula una carga con retraso de 2 segundos
+        //https://developer.android.com/reference/android/os/Handler
+
+        mostrarProgressBar();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                adaptadorEvento.actualizarListaFiltradoEventos(listaEventosFiltrados);
+                ocultarProgressBar();
+            }
+        }, 2000);
+
     }
 
     //Se agrega el menú de opciones
@@ -278,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(chooser);
             }
             else{
-                //Si no hay ningún aplicación que pueda manjear el intent se muestra un mensaje
+                //Si no hay ninguna aplicación que pueda manjear el intent se muestra un mensaje
                 Toast.makeText(this, "No hay ninguna aplicación instalada para enviar este mensaje", Toast.LENGTH_LONG).show();
             }
             return true;
@@ -303,5 +327,15 @@ public class MainActivity extends AppCompatActivity {
                 listaEventosFavoritos.add(evento);
             }
         }
+    }
+
+    //Método para mostrar el ProgressBar
+    private void mostrarProgressBar(){
+        progressBarMain.setVisibility(View.VISIBLE);
+    }
+
+    //Método para ocultar el ProgressBar
+    private void ocultarProgressBar(){
+        progressBarMain.setVisibility(View.GONE);
     }
 }

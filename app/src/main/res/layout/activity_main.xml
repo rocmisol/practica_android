@@ -8,16 +8,17 @@
     android:layout_margin="20dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textViewTituloMain"
+    <ProgressBar
+        android:id="@+id/progressBarMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/eventos_salamanca"
-        android:textSize="22sp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="center"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewFechaMain"
+        android:elevation="10dp"/>
 
     <Button
         android:id="@+id/buttonCalendarioMain"
@@ -26,17 +27,17 @@
         android:text="@string/calendario"
         android:textSize="14sp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewTituloMain"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <Spinner
         android:id="@+id/spinnerCategoriaMain"
         android:layout_width="135dp"
         android:layout_height="40dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTituloMain"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <CheckBox
@@ -53,19 +54,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="@id/spinnerCategoriaMain"
-        app:layout_constraintTop_toBottomOf="@id/checkBoxGratuitoMain"/>
+        app:layout_constraintBottom_toBottomOf="@id/checkBoxGratuitoMain"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMain"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewFechaMain"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

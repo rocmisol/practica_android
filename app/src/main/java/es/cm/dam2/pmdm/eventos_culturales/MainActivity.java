@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         listaEventos = FuncionRelleno.rellenaEventos();
 
 
-        //Configuración del textView
+        //Vinculación del textView
         textViewFecha = findViewById(R.id.textViewFechaMain);
 
         //Se asocia la vista al objeto
@@ -125,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == RESULT_OK && result.getData() != null){
-                            //Intent datos = result.getData();
+                            //El evento se duplica, asíque no vale. Hay que modificarlo
+                            // Intent datos = result.getData();
                             //Evento evento = (Evento)datos.getSerializableExtra("eventoModificado");
                             //listaEventos.add(evento);
                             //filtrarEventos();
@@ -179,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Método para filtrar los eventos según su categoría, fecha seleccionada y si son gratuitos o no
+    // y actualizar la lista que se pasa al recycler
     public void filtrarEventos(){
         categoriaSelecionada = spinnerCategoria.getSelectedItem().toString();
         fechaSeleccionada = textViewFecha.getText().toString();

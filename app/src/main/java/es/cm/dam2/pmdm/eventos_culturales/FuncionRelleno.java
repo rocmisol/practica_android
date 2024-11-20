@@ -11,8 +11,7 @@ public class FuncionRelleno {
 
         listaEventos = new ArrayList<>();
 
-        String descripcionReinoHielo ="Del 29 de noviembre al 5 de enero de 18.30 a 22.00 horas\n" +
-                "(los días 24 y 31 de diciembre el horario será de 18:30h a 20:00h.)\n" + "\n" +
+        String descripcionReinoHielo ="Del 29 de noviembre al 5 de enero de 18.30 a 22.00 horas (los días 24 y 31 de diciembre el horario será de 18:30h a 20:00h.)\n" + "\n" +
                 "“La senda de los animales del hielo” es una experiencia inmersiva al aire libre, especialmente diseñada para el huerto de Calixto y Melibea." +
                 " Un paseo en el que los visitantes podrán reconocer distintos tipos de animales iluminados como osos, focas, zorros blancos, renos, morsas," +
                 " búhos o leopardo de las nieves y disfrutar del momento haciendo fotos y conociendo un poco acerca de los seres que habitan una de las " +
@@ -43,7 +42,7 @@ public class FuncionRelleno {
                 "las relaciones familiares en las zonas más desfavorecidas y despobladas de nuestro mundo.\n" + "\n" +"Autor: Martin Mcdonagh. \n" +
                 "Dirección: Juan Echanove. \n" + "Intérpretes: María Galiana, Lucía Quintana, Javier Mora y Alberto Fraga";
 
-        String descripcionNavidadPolifQuinteto ="Programa: \n" +  "\n" + "  - Hallelujah\n" + "  - Joy to the world\n" + "  - Cantata 147 bach\n" +
+        String descripcionNavidadPolifQuinteto ="Programa: \n" + "  - Hallelujah\n" + "  - Joy to the world\n" + "  - Cantata 147 bach\n" +
                 "  - White Christmas\n" + "  - Kamen\n" + "  - Adeste fideles\n" + " - Tamborilero\n" + "  - Santa Baby\n" + "  - Let it Snow\n" +
                 "  - Jingle bells rock";
 

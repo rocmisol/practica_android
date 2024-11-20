@@ -30,4 +30,6 @@
     <string name="mira_este_evento">¡Mira este evento!</string>
     <string name="no_hay_aplicacion_instalada">No hay ninguna aplicación instalada para enviar este mensaje</string>
     <string name="evento_aniadido_al_calendario">Evento añadido al calendario</string>
+    <string name="favorito">Favorito:</string>
+    <string name="selecciona_opcion">Selecciona una opción</string>
 </resources>

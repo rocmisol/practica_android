@@ -55,7 +55,7 @@ public class FavoritosActivity extends AppCompatActivity {
         recyclerViewFavoritos = findViewById(R.id.recyclerViewFavoritos);
         editTextNotasFavoritos = findViewById(R.id.editTextNotasFavoritos);
 
-        //Se obtiene el evento desde el Intent
+        //Se obtiene la lista de varitos desde el Intent
         listaPasarEventosFavoritos = (ListaPasarEventosFavoritos) getIntent().getSerializableExtra("listaFavoritos");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -65,7 +65,6 @@ public class FavoritosActivity extends AppCompatActivity {
         adaptadorEvento = new AdaptadorEvento(listaPasarEventosFavoritos.getListaEventosFavoritos(), this);
         recyclerViewFavoritos.setAdapter((adaptadorEvento));
 
-        //Se recuperan los eventos favoritos
 
         //Se cargan las anotaciones guardadas
         sharedPreferences = getSharedPreferences("NotasFavoritos", MODE_PRIVATE);

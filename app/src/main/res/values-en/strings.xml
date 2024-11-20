@@ -31,4 +31,6 @@
     <string name="mira_este_evento">Check out this event!</string>
     <string name="no_hay_aplicacion_instalada">There is no application installed to send this message</string>
     <string name="evento_aniadido_al_calendario">Event added to the calendar</string>
+    <string name="favorito">Favorite:</string>
+    <string name="selecciona_opcion">Select an option</string>
 </resources>

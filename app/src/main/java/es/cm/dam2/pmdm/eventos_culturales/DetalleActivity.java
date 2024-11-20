@@ -91,7 +91,7 @@ public class DetalleActivity extends AppCompatActivity {
                     //Se verifica si se tiene permiso para escribir en el calendario.
                     if (ContextCompat.checkSelfPermission(DetalleActivity.this,
                             android.Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
-                        //Si no se tiene, se solicita
+                        //Si no se tiene, se solicita en onRequestPermissionsResult
                         ActivityCompat.requestPermissions(DetalleActivity.this, new String[]{android.Manifest.permission.WRITE_CALENDAR}, 1);
                     } else {
                         // Si ya tiene el permiso, se añade el evento al calendario sin pasar por onRequestPermissionsResult

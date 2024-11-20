@@ -37,6 +37,7 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Miview
         public MiviewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnCreateContextMenuListener(this);
+            // Se vinculan las vistas del item
             itemNombre = itemView.findViewById(R.id.textViewItemNombre);
             itemFecha = itemView.findViewById(R.id.textViewItemFecha);
             itemFotoMini = itemView.findViewById(R.id.imageViewItemFotomini);
@@ -50,7 +51,7 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Miview
             inflater.inflate(R.menu.menu_contextual, contextMenu);
 
             // Se asocian las acciones al elemento seleccionado
-            contextMenu.setHeaderTitle("Selecciona una opción");
+            contextMenu.setHeaderTitle(R.string.selecciona_opcion);
         }
     }
 
@@ -58,19 +59,21 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Miview
     @NonNull
     @Override
     public AdaptadorEvento.MiviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Se infla la vista del item
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_evento, parent, false);
         return new MiviewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdaptadorEvento.MiviewHolder holder, int position) {
-
+        //Se modifica la vista del recycler con los valores que se quieren para cada posición
         if (position % 2 ==0){
             holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.violet1));
 
         } else{
             holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.violet2));
         }
+
         Evento evento = this.eventos.get(position);
         holder.itemNombre.setText(evento.getNombre());
         holder.itemFecha.setText(evento.getFecha());
@@ -78,7 +81,7 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Miview
         holder.itemFotoFavorito.setImageResource(
                 evento.isFavorito()? R.drawable.corazon_lleno : R.drawable.corazon_vacio);
 
-        //Se configura un clic largo para abrir el mení contextual
+        //Se configura un clic largo para abrir el menú contextual
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -95,10 +98,12 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Miview
 
     //Método para manejar la lista de eventos filtrada
     public void actualizarListaFiltradoEventos (ArrayList<Evento> eventosFiltrados ){
-        this.eventos = eventosFiltrados; //Se actualiza la lista interna del adaptador
+        this.eventos = eventosFiltrados; //Se actualiza la lista interna de datos del adaptador
         notifyDataSetChanged();//Notifica al Recyclerview para refrescar la vista
     }
 
+    //Método para devolver la posición seleccionada al activity para que esta sepa que elemento
+    // del recycler está seleccionado
     public int getPosicionSeleccionada(){
         return posicionSeleccionada;
     }

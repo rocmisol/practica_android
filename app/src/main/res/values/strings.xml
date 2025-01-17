@@ -32,4 +32,10 @@
     <string name="evento_aniadido_al_calendario">Evento añadido al calendario</string>
     <string name="favorito">Favorito:</string>
     <string name="selecciona_opcion">Selecciona una opción</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="log_in">Log in</string>
+    <string name="no_tienes_cuenta">¿No tienes cuenta?</string>
+    <string name="registro">Regístrate</string>
 </resources>

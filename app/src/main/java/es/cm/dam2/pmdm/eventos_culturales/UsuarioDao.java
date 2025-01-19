@@ -26,7 +26,9 @@ public interface UsuarioDao {
     @Query("SELECT * FROM usuarios WHERE email = :email LIMIT 1")
     Usuario obtenerUsuarioPorEmail(String email);
 
-
+    //Método para obtener el número de teléfono del administrador
+    @Query("SELECT telefono FROM usuarios WHERE rol = 'admin'")
+    String obtenerTelefonoAdministrador();
 
 
 }

@@ -1,7 +1,9 @@
 package es.cm.dam2.pmdm.eventos_culturales;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.ContextMenu;
@@ -27,6 +29,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -179,6 +183,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Como es un recyclerView ya no se puede utilizar
         // registerForContextMenu(recyclerViewEventos);
+
+        // Se verifica si se tiene permiso para enviar SMS
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                android.Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+            //Si no se tiene, se solicita en onRequestPermissionsResult
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
+        }
+
+        // Se arranca el servicio (independienetemente de si se tiene permisos o no para enviar SMS)
+        startBatteryMonitorService();
 
     }
 
@@ -345,5 +359,28 @@ public class MainActivity extends AppCompatActivity {
     //Método para ocultar el ProgressBar
     private void ocultarProgressBar(){
         progressBarMain.setVisibility(View.GONE);
+    }
+
+
+    //Método para manejar la respuesta del ususario cuando se solicita un permiso en tiempo de ejecución
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // Se verifica que la respuesta corresponde al permiso solicitado (requesCode 1)
+        if (requestCode == 1){
+            // Se comprueba si tiene permiso.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, R.string.permiso_para_enviar_sms_concedido, Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(this, R.string.permiso_para_enviar_sms_denegado, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // Método para arrancar el servicio para monitorizar la batería
+    private void startBatteryMonitorService(){
+        Intent intet = new Intent(this, BatteryService.class);
+        startService(intet);
     }
 }

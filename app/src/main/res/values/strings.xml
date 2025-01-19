@@ -46,4 +46,10 @@
     <string name="se_deben_completar_todos_los_campos">Se deben completar todos los campos</string>
     <string name="usuario_registrado">Usuario registrado</string>
     <string name="el_usuario_ya_registrado">El usuario ya está registrado</string>
+    <string name="no_tienes_permisos_para_enviar_sms">No tienes permisos para enviar sms</string>
+    <string name="el_nivel_de_bateria_est_por_debajo_del_5">¡El nivel de batería está por debajo del 5%!</string>
+    <string name="mensaje_enviado">Mensaje enviado</string>
+    <string name="se_ha_producido_un_error_al_enviar_el_mensaje">Se ha producido un error al enviar el mensaje</string>
+    <string name="permiso_para_enviar_sms_concedido">Permiso para enviar sms concedido</string>
+    <string name="permiso_para_enviar_sms_denegado">Permiso para enviar sms denegado</string>
 </resources>

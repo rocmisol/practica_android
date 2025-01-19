@@ -71,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
         //Se rellena el ArrayList listaEventos con todos los eventos.
         listaEventos = FuncionRelleno.rellenaEventos();
 
+        // listaEventos = database.dao.geteventos();????
+
+        //en lugar de coger la lista de eventos general de la FuncionRelleno, cogerlo desde base de datos???
+
 
         //Vinculación del textView
         textViewFecha = findViewById(R.id.textViewFechaMain);

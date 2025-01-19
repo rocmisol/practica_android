@@ -9,7 +9,7 @@ public class DatabaseClient {
 
     public static AppDatabase getInstance(Context context){
         //Se crea la base de datos si no existe
-        if (database == null){
+        if (database == null) {
             database = Room.databaseBuilder(context.getApplicationContext(),
                     AppDatabase.class, "eventos")
                     .allowMainThreadQueries()

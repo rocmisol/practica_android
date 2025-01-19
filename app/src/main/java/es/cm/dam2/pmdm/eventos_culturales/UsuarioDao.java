@@ -4,6 +4,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.List;
+
 @Dao
 public interface UsuarioDao {
     @Insert
@@ -12,7 +14,15 @@ public interface UsuarioDao {
     @Query("SELECT * FROM usuarios WHERE id = :id")
     Usuario obtenerUsuario (int id);
 
+    //Método para comprobar si un usario está en la base de datos
     @Query("SELECT * FROM usuarios WHERE email = :email AND password = :password")
     Usuario comprobarUsuarioRegistrado (String email, String password);
+
+    //Método para obtener todos los usuarios
+    @Query("SELECT * FROM usuarios")
+    List<Usuario> obtenerTodosUsuarios();
+
+
+
 
 }

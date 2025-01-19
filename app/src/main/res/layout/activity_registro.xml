@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistroActivity">
+
+    <TextView
+        android:id="@+id/textViewRegistroRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/formulario_registro"
+        android:textSize="22sp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/editTextNombreRegistro"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/nombre_apellidos"
+        android:inputType="textPersonName"
+        android:textSize="22sp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/bordes"
+        android:padding="10dp"
+        android:layout_marginTop="50sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewRegistroRegistro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/editTextTelefonoRegistro"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/telefono"
+        android:inputType="phone"
+        android:textSize="22sp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/bordes"
+        android:padding="10dp"
+        android:layout_marginTop="20sp"
+        app:layout_constraintTop_toBottomOf="@id/editTextNombreRegistro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/editTextEmailRegistro"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textSize="22sp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/bordes"
+        android:padding="10dp"
+        android:layout_marginTop="20sp"
+        app:layout_constraintTop_toBottomOf="@id/editTextTelefonoRegistro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/editTextPasswordRegistro"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:inputType="textVisiblePassword"
+        android:textSize="22sp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/bordes"
+        android:padding="10dp"
+        android:layout_marginTop="20sp"
+        app:layout_constraintTop_toBottomOf="@id/editTextEmailRegistro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewPolitica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/politica_privacidad"
+        android:layout_marginTop="70sp"
+        android:padding="20sp"
+        app:layout_constraintTop_toBottomOf="@id/editTextPasswordRegistro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/LinearRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewPolitica"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/buttonGuardarRegistro"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="@string/guardar"/>
+
+        <Button
+            android:id="@+id/buttonCancelarRegistro"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/cancelar"/>
+
+    </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,9 @@ public class Usuario {
     @ColumnInfo(name = "nombre")
     public String nombre;
 
+    @ColumnInfo(name = "telefono")
+    public String telefono;
+
     @ColumnInfo(name = "email")
     public String email;
 
@@ -27,10 +30,10 @@ public class Usuario {
     }
 
     //Constructor con parámetros
-    public Usuario(int id, String nombre, String user, String password, String rol) {
-        this.id = id;
+    public Usuario(String nombre, String telefono, String email, String password, String rol) {
         this.nombre = nombre;
-        this.email = user;
+        this.telefono = telefono;
+        this.email = email;
         this.password = password;
         this.rol = rol;
     }
@@ -50,6 +53,14 @@ public class Usuario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getEmail() {
@@ -77,12 +88,14 @@ public class Usuario {
     }
 
     //Método toString()
+
     @Override
     public String toString() {
         return "Usuario{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", user='" + email + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", rol='" + rol + '\'' +
                 '}';

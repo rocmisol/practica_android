@@ -89,14 +89,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        textViewRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //LLeva a la activity RegistroActivity para que el usuario se registre
+                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void insertarUsuariosPredeterminados(){
         //Se comprueba que la base de datos está vacía
         if (usuarioDao.obtenerTodosUsuarios().isEmpty()){
             // Se crea el administrador y un usuario por defecto
-            Usuario admin = new Usuario(1, "admin", "admin@eventosculturales.com", "admin", "admin");
-            Usuario user1 = new Usuario(2, "usuario", "usuario@eventosculturales.com", "usuario", "user");
+            Usuario admin = new Usuario("admin", "666111222", "admin@eventosculturales.com", "admin", "admin");
+            Usuario user1 = new Usuario("usuario", "666111333", "usuario@eventosculturales.com", "usuario", "user");
 
             //Se insertan los usuarios en la base de datos
             new Thread((new Runnable() {

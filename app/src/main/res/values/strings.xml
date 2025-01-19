@@ -37,5 +37,13 @@
     <string name="login">LOGIN</string>
     <string name="log_in">Log in</string>
     <string name="no_tienes_cuenta">¿No tienes cuenta?</string>
-    <string name="registro">Regístrate</string>
+    <string name="registro"><u>Regístrate</u></string>
+    <string name="nombre_apellidos">Nombre y Apellidos</string>
+    <string name="telefono">Teléfono</string>
+    <string name="formulario_registro">FORMULARIO PARA REGISTRARSE:</string>
+    <string name="politica_privacidad">Al pulsar en guardar aceptas las Condiciones de uso y la Política de Provacidad y Protección de Datos</string>
+    <string name="cancelar">CANCELAR</string>
+    <string name="se_deben_completar_todos_los_campos">Se deben completar todos los campos</string>
+    <string name="usuario_registrado">Usuario registrado</string>
+    <string name="el_usuario_ya_registrado">El usuario ya está registrado</string>
 </resources>

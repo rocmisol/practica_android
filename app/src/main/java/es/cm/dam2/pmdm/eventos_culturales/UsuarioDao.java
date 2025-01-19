@@ -22,6 +22,10 @@ public interface UsuarioDao {
     @Query("SELECT * FROM usuarios")
     List<Usuario> obtenerTodosUsuarios();
 
+    //Método para buscar un usuario por email
+    @Query("SELECT * FROM usuarios WHERE email = :email LIMIT 1")
+    Usuario obtenerUsuarioPorEmail(String email);
+
 
 
 

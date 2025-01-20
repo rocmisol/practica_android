@@ -1,10 +1,12 @@
 package es.cm.dam2.pmdm.eventos_culturales;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +20,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextEmail, editTextPassword;
     private Button buttonLogin;
+    private ImageButton imageButtonSound;
     private TextView textViewRegistro;
     private UsuarioDao usuarioDao;
     private AppDatabase database;
+    private MediaPlayer mediaPlayer;
+    private boolean isPlaying = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
         textViewRegistro = findViewById(R.id.textViewRegistrate);
+        imageButtonSound = findViewById(R.id.imageButtonSoundLogin);
 
         //Se obtiene la base de datos
         database = DatabaseClient.getInstance(this);
@@ -45,8 +51,14 @@ public class LoginActivity extends AppCompatActivity {
         //Se obtiene el usuarioDao
         usuarioDao = database.usuarioDao();
 
-        //e insertan usuarios iniciales en la base de datos (si está vacía)
+        //Se insertan usuarios iniciales en la base de datos (si está vacía)
         insertarUsuariosPredeterminados();
+
+        //Se iniciliza el MediaPlayer y se configura el audio en bucle
+        mediaPlayer = MediaPlayer.create(this, R.raw.relaxing_guitar);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+
 
         //Botón Login
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +110,33 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        imageButtonSound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlaying){
+                    mediaPlayer.pause();
+                    imageButtonSound.setImageResource(R.drawable.icon_sound_off);
+                }
+                else{
+                    mediaPlayer.start();
+                    imageButtonSound.setImageResource(R.drawable.icon_sound_on);
+                }
+                isPlaying = !isPlaying;
+            }
+        });
+
+
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null){
+            mediaPlayer.release(); // Se liberan recursos al cerrar la actividad
+            mediaPlayer = null;
+        }
     }
 
     private void insertarUsuariosPredeterminados(){

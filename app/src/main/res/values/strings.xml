@@ -52,4 +52,5 @@
     <string name="se_ha_producido_un_error_al_enviar_el_mensaje">Se ha producido un error al enviar el mensaje</string>
     <string name="permiso_para_enviar_sms_concedido">Permiso para enviar sms concedido</string>
     <string name="permiso_para_enviar_sms_denegado">Permiso para enviar sms denegado</string>
+    <string name="activar_o_desactivar_sonido">Activar o desactivar sonido</string>
 </resources>

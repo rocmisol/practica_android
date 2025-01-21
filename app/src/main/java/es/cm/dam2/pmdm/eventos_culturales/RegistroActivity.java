@@ -1,5 +1,7 @@
 package es.cm.dam2.pmdm.eventos_culturales;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -65,9 +67,10 @@ public class RegistroActivity extends AppCompatActivity {
                         Usuario nuevoUsuario = new Usuario(nombre, telefono, email, password, "user");
                         usuarioDao.insertar(nuevoUsuario);
 
-                        //Si el usuario se inserta se muestra un menasje y se envia una notificación
+                        //Si el usuario se inserta se muestra un mensaje y se envia una notificación
                         Toast.makeText(RegistroActivity.this, R.string.usuario_registrado, Toast.LENGTH_SHORT).show();
-                        mostrarNotificacionAltaUsuario();
+                        String nombreUsuario = usuarioDao.obtenerUltimoUsuario();
+                        mostrarNotificacionAltaUsuario(nombreUsuario);
 
                         //Regresa a la activity LoginActivity
                         Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
@@ -90,15 +93,15 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     //Método que muestra una notificación al dar de alta un usuario
-    private void mostrarNotificacionAltaUsuario (){
+    private void mostrarNotificacionAltaUsuario (String nombreUsuario){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_alta");
         builder.setSmallIcon(R.drawable.warning);
         builder.setContentTitle("Alta");
-        builder.setContentText("Se ha dado de alta al usuario");
+        builder.setContentText(getString(R.string.se_ha_dado_de_alta_al_usuario) + nombreUsuario);
         builder.setAutoCancel(true);
 
-        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
-        manager.notify(1, builder.build());
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, builder.build());
     }
 
 

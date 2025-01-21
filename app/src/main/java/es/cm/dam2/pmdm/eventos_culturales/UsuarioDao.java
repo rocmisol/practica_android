@@ -30,5 +30,9 @@ public interface UsuarioDao {
     @Query("SELECT telefono FROM usuarios WHERE rol = 'admin'")
     String obtenerTelefonoAdministrador();
 
+    //Método para obtener el último usuario
+    @Query("SELECT nombre FROM usuarios ORDER BY id DESC LIMIT 1")
+    String obtenerUltimoUsuario();
+
 
 }

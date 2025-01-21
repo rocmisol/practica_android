@@ -131,12 +131,27 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()){
+            mediaPlayer.pause();
+        }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mediaPlayer != null){
+            mediaPlayer.start();
+        }
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mediaPlayer != null){
+            mediaPlayer.stop();
             mediaPlayer.release(); // Se liberan recursos al cerrar la actividad
             mediaPlayer = null;
         }

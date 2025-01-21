@@ -2,6 +2,9 @@ package es.cm.dam2.pmdm.eventos_culturales;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -194,6 +197,9 @@ public class MainActivity extends AppCompatActivity {
         // Se arranca el servicio (independienetemente de si se tiene permisos o no para enviar SMS)
         startBatteryMonitorService();
 
+        //Se crean los canales de notifiación
+        crearCanalNotificacion();
+
     }
 
     //Método para filtrar los eventos según su categoría, fecha seleccionada y si son gratuitos o no
@@ -382,5 +388,19 @@ public class MainActivity extends AppCompatActivity {
     private void startBatteryMonitorService(){
         Intent intet = new Intent(this, BatteryService.class);
         startService(intet);
+    }
+
+    //Método para crear un canal de notificación
+    private void crearCanalNotificacion(){
+        NotificationManager notificationManager = (NotificationManager) getSystemService((Context.NOTIFICATION_SERVICE));
+
+        //Canal para alta de usuario en el sistema
+        String channelIdAltaUsuario = "channel_alta";
+        CharSequence channelNameAlta = "Notificación de alta";
+        int importanceAlta = NotificationManager.IMPORTANCE_LOW;
+        NotificationChannel altaUsuarioChanel = new NotificationChannel(channelIdAltaUsuario, channelNameAlta, importanceAlta);
+        notificationManager.createNotificationChannel(altaUsuarioChanel);
+
+        //Canal para borrado de usuario en el sistema
     }
 }

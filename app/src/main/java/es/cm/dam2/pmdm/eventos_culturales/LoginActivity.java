@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationChannelCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -139,6 +142,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //Método que inserta dos usuarios predeterminados enla base de datos (la 1ª vez)
     private void insertarUsuariosPredeterminados(){
         //Se comprueba que la base de datos está vacía
         if (usuarioDao.obtenerTodosUsuarios().isEmpty()){
@@ -156,6 +160,9 @@ public class LoginActivity extends AppCompatActivity {
             })).start();
         }
     }
+
+
+
 
 
 }

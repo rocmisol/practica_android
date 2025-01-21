@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -53,7 +55,7 @@ public class RegistroActivity extends AppCompatActivity {
                 else{
                     UsuarioDao usuarioDao = DatabaseClient.getInstance(getApplicationContext()).usuarioDao();
 
-                    //Se comprueba si el usuari ya está registrado
+                    //Se comprueba si el usuario ya está registrado
                     Usuario usuarioExistente = usuarioDao.obtenerUsuarioPorEmail(email);
 
                     if (usuarioExistente != null){
@@ -63,8 +65,9 @@ public class RegistroActivity extends AppCompatActivity {
                         Usuario nuevoUsuario = new Usuario(nombre, telefono, email, password, "user");
                         usuarioDao.insertar(nuevoUsuario);
 
-                        //Si el usuario se inserta se muestra un mesnaje
+                        //Si el usuario se inserta se muestra un menasje y se envia una notificación
                         Toast.makeText(RegistroActivity.this, R.string.usuario_registrado, Toast.LENGTH_SHORT).show();
+                        mostrarNotificacionAltaUsuario();
 
                         //Regresa a la activity LoginActivity
                         Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
@@ -85,4 +88,18 @@ public class RegistroActivity extends AppCompatActivity {
         });
 
     }
+
+    //Método que muestra una notificación al dar de alta un usuario
+    private void mostrarNotificacionAltaUsuario (){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_alta");
+        builder.setSmallIcon(R.drawable.warning);
+        builder.setContentTitle("Alta");
+        builder.setContentText("Se ha dado de alta al usuario");
+        builder.setAutoCancel(true);
+
+        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
+        manager.notify(1, builder.build());
+    }
+
+
 }

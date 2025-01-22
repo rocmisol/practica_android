@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.UsuarioDao;
+
 public class BatteryService extends Service {
     private BroadcastReceiver batteryReceiver;
 

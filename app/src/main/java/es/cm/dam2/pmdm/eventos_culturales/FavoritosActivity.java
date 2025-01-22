@@ -2,10 +2,8 @@ package es.cm.dam2.pmdm.eventos_culturales;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -18,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 
-import java.util.ArrayList;
+import es.cm.dam2.pmdm.eventos_culturales.Adaptadores.AdaptadorEvento;
 
 public class FavoritosActivity extends AppCompatActivity {
 

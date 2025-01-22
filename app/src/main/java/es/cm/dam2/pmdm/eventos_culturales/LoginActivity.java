@@ -1,6 +1,7 @@
 package es.cm.dam2.pmdm.eventos_culturales;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +13,16 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationChannelCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.preference.PreferenceManager;
+
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.AppDatabase;
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.UsuarioDao;
+import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,6 +37,17 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean modoOscuro = preferencias.getBoolean("pref_tema", false);
+        if (modoOscuro){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
@@ -61,6 +77,8 @@ public class LoginActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this, R.raw.relaxing_guitar);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
+
+
 
 
         //Botón Login

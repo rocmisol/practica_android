@@ -28,6 +28,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
+
 public class DetalleActivity extends AppCompatActivity {
 
     private TextView textViewTituloDetalle, textViewFechaDetalle, textViewLugarDetalle,
@@ -161,7 +163,7 @@ public class DetalleActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
 
         // Se combina la fecha y la hora en un solo string
-        String fechaHora = evento.fecha + " " + evento.hora;
+        String fechaHora = evento.getFecha() + " " + evento.getHora();
 
         // Se convierte fecha al formato de milisegundos
         Date date = dateFormat.parse(fechaHora);
@@ -176,8 +178,8 @@ public class DetalleActivity extends AppCompatActivity {
                 // Se crea un objeto ContentValues para definir los detalles del evento
                 ContentValues values = new ContentValues();
                 values.put(CalendarContract.Events.CALENDAR_ID, 1); // Se usa el primer calendario disponible
-                values.put(CalendarContract.Events.TITLE, evento.nombre);
-                values.put(CalendarContract.Events.EVENT_LOCATION, evento.lugar);
+                values.put(CalendarContract.Events.TITLE, evento.getNombre());
+                values.put(CalendarContract.Events.EVENT_LOCATION, evento.getLugar());
                 values.put(CalendarContract.Events.DTSTART, beginTime);
                 values.put(CalendarContract.Events.DTEND, endTime);
                 values.put(CalendarContract.Events.ALL_DAY, false);

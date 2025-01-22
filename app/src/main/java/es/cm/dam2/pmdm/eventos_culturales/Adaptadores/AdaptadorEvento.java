@@ -1,7 +1,6 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.Adaptadores;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -14,8 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.sql.Array;
 import java.util.ArrayList;
+
+import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
+import es.cm.dam2.pmdm.eventos_culturales.MainActivity;
+import es.cm.dam2.pmdm.eventos_culturales.R;
 
 public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.MiviewHolder> {
     private ArrayList<Evento> eventos;

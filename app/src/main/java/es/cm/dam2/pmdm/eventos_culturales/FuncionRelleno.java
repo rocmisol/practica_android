@@ -2,6 +2,8 @@ package es.cm.dam2.pmdm.eventos_culturales;
 
 import java.util.ArrayList;
 
+import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
+
 public class FuncionRelleno {
 
     //Método para rellenar el ArrayList Evento con todos los datos de cada uno de los eventos
@@ -84,23 +86,23 @@ public class FuncionRelleno {
                 "Sheila Blanco, Divinas Conmedias, Alberto Cabrillas, Jes Martin’s, Armando de Miguel y Javi & Jenny, todos ellos presentados por Don Carlos. ";
 
 
-        listaEventos.add(new Evento("La senda de los animales de hielo", "29/11/2024", "Exposición",
+        listaEventos.add(new Evento(1,"La senda de los animales de hielo", "29/11/2024", "Exposición",
                 R.drawable.senda_animales_hielo,"Huerto de Calixto y Melibea", descripcionReinoHielo, GRATUITO, false,
                 4.8F, "18:30"));
-        listaEventos.add(new Evento("Esto no es un show", "01/12/2024", "Escena",
+        listaEventos.add(new Evento(2,"Esto no es un show", "01/12/2024", "Escena",
                 R.drawable.galder,"CAEM", descripcionGalder, "20€", false, 4.5F, "17:30"));
-        listaEventos.add(new Evento("La reina de la belleza de Leeane", "13/12/2024", "Escena",
+        listaEventos.add(new Evento(3,"La reina de la belleza de Leeane", "13/12/2024", "Escena",
                 R.drawable.reina_belleza,"Teatro Liceo", descripcionLeeane, "15€", false, 4.1F, "21:00"));
-        listaEventos.add(new Evento("Navidad Polifónica. Quinteto de Metales del COSCYL", "14/12/2024", "Música",
+        listaEventos.add(new Evento(4,"Navidad Polifónica. Quinteto de Metales del COSCYL", "14/12/2024", "Música",
                 R.drawable.navidad_polifonica,"Iglesia de San Sebastián", descripcionNavidadPolifQuinteto, GRATUITO, false,
                 4.1F, "20:30"));
-        listaEventos.add(new Evento("Belén navideño", "02/12/2024", "Exposición", R.drawable.belen_navidenio,"Torre de los Anaya",
+        listaEventos.add(new Evento(5, "Belén navideño", "02/12/2024", "Exposición", R.drawable.belen_navidenio,"Torre de los Anaya",
                 descricionBelen, GRATUITO, false, 4.0F, "12:00"));
-        listaEventos.add(new Evento("Animales de compañía", "23/11/2024", "Escena",
+        listaEventos.add(new Evento(6,"Animales de compañía", "23/11/2024", "Escena",
                 R.drawable.animales_compania,"Teatro Liceo", descripcionAnimales, "15€", false, 4.5F, "21:30"));
-        listaEventos.add(new Evento("El lago de los cisnes", "04/01/2025", "Escena",
+        listaEventos.add(new Evento(7,"El lago de los cisnes", "04/01/2025", "Escena",
                 R.drawable.laco_cisnes,"CAEM", descripcionLago, "32€", false,4.2F, "19:00"));
-        listaEventos.add(new Evento("Gran café teatro", "07/12/2024", "Escena",
+        listaEventos.add(new Evento(8,"Gran café teatro", "07/12/2024", "Escena",
                 R.drawable.gran_cafe,"CAEM", descripcionCafeTeatro, "18€", false,4.3F, "22:00"));
 
         return listaEventos;

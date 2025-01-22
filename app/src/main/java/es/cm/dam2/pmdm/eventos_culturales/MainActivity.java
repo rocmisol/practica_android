@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,6 +44,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import es.cm.dam2.pmdm.eventos_culturales.Adaptadores.AdaptadorEvento;
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.AppDatabase;
+import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
+import es.cm.dam2.pmdm.eventos_culturales.ui.AjustesActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView textViewFecha;
@@ -62,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
     private String categoriaSelecionada = "Todos";
     private String fechaSeleccionada = "Todos";
     private boolean gratuito;
+
+    private ImageButton imageButtonAjustes;
+    private AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,12 +193,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Configuración del imageButton
+        imageButtonAjustes = findViewById(R.id.imageButtonAjustes);
+        imageButtonAjustes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AjustesActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // Como es un recyclerView ya no se puede utilizar
         // registerForContextMenu(recyclerViewEventos);
 
         // Se verifica si se tiene permiso para enviar SMS
         if (ContextCompat.checkSelfPermission(MainActivity.this,
-                android.Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+                Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
             //Si no se tiene, se solicita en onRequestPermissionsResult
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
         }
@@ -307,11 +326,11 @@ public class MainActivity extends AppCompatActivity {
 
         if(id == R.id.compartir){
             //Se utiliza una aplicación de nuestro dispositivo para enviar información del evento.
-            String nombreEvento = eventoSeleccionado.nombre;
-            String fechaEvento = eventoSeleccionado.fecha;
-            String lugarEvento = eventoSeleccionado.lugar;
-            String precioEvento = eventoSeleccionado.precio;
-            String descripcionEvento = eventoSeleccionado.descripcion;
+            String nombreEvento = eventoSeleccionado.getNombre();
+            String fechaEvento = eventoSeleccionado.getFecha();
+            String lugarEvento = eventoSeleccionado.getLugar();
+            String precioEvento = eventoSeleccionado.getPrecio();
+            String descripcionEvento = eventoSeleccionado.getDescripcion();
 
             //Mensaje que aparecerá al enviar la información.
             String mensaje =getString(R.string.mira_este_evento) + "\n" + nombreEvento + "\n" +

@@ -1,4 +1,4 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

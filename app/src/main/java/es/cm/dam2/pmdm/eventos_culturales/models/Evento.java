@@ -1,8 +1,9 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.models;
 
 import java.io.Serializable;
 
 public class Evento implements Serializable {
+    int id;
     String nombre;
     String fecha;
     String categoria;
@@ -15,7 +16,8 @@ public class Evento implements Serializable {
     String hora;
     String comentario = "";
 
-    public Evento(String nombre, String fecha, String clase, int imagen, String lugar, String descripcion, String precio, boolean favorito, float valoracion, String hora) {
+    public Evento(int id, String nombre, String fecha, String clase, int imagen, String lugar, String descripcion, String precio, boolean favorito, float valoracion, String hora) {
+        this.id = id;
         this.nombre = nombre;
         this.fecha = fecha;
         this.categoria = clase;
@@ -26,6 +28,14 @@ public class Evento implements Serializable {
         this.favorito = favorito;
         this.valoracion = valoracion;
         this.hora = hora;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -116,16 +126,18 @@ public class Evento implements Serializable {
         this.comentario = comentario;
     }
 
+
     @Override
     public String toString() {
         return "Evento{" +
-                "nombre='" + nombre + '\'' +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
                 ", fecha='" + fecha + '\'' +
-                ", clase='" + categoria + '\'' +
+                ", categoria='" + categoria + '\'' +
                 ", imagen=" + imagen +
                 ", lugar='" + lugar + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", precio=" + precio +
+                ", precio='" + precio + '\'' +
                 ", favorito=" + favorito +
                 ", valoracion=" + valoracion +
                 ", hora='" + hora + '\'' +

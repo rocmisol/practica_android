@@ -54,4 +54,5 @@
     <string name="permiso_para_enviar_sms_denegado">Permiso para enviar sms denegado</string>
     <string name="activar_o_desactivar_sonido">Activar o desactivar sonido</string>
     <string name="se_ha_dado_de_alta_al_usuario">Se ha dado de alta al usuario</string>
+    <string name="ajustes">Ajustes</string>
 </resources>

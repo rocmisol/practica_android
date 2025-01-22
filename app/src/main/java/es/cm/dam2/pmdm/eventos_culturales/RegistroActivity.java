@@ -12,10 +12,13 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.UsuarioDao;
+import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
 
 public class RegistroActivity extends AppCompatActivity {
 

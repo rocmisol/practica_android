@@ -1,4 +1,4 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.basedatos;
 
 import android.content.Context;
 

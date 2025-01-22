@@ -1,10 +1,12 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.basedatos;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
+
+import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
 
 @Dao
 public interface UsuarioDao {
@@ -33,6 +35,8 @@ public interface UsuarioDao {
     //Método para obtener el último usuario
     @Query("SELECT nombre FROM usuarios ORDER BY id DESC LIMIT 1")
     String obtenerUltimoUsuario();
+
+
 
 
 }

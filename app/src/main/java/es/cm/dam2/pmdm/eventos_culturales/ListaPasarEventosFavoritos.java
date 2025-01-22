@@ -3,6 +3,8 @@ package es.cm.dam2.pmdm.eventos_culturales;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
+
 
 //Lista serializable para poder pasarla con putExtra en la intent
 public class ListaPasarEventosFavoritos implements Serializable {

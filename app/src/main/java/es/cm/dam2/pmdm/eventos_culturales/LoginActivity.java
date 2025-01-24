@@ -1,5 +1,6 @@
 package es.cm.dam2.pmdm.eventos_culturales;
 
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -29,6 +31,7 @@ import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.UsuarioDao;
 import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
 import es.cm.dam2.pmdm.eventos_culturales.ui.LoginFragment;
+import es.cm.dam2.pmdm.eventos_culturales.ui.RegistroFragment;
 
 public class LoginActivity extends AppCompatActivity {
     private UsuarioDao usuarioDao;
@@ -51,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        // setTheme(R.style.AppTheme_ColorRed);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
@@ -133,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
         unregisterReceiver(broadcastReceiver);
     }
 
+
     //Método que inserta dos usuarios predeterminados enla base de datos (la 1ª vez)
     private void insertarUsuariosPredeterminados(){
         //Se comprueba que la base de datos está vacía
@@ -168,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void mostrarLoginFragment () {
+    public void mostrarLoginFragment () {
         // Se obtiene una instancia de FragmentManager()
         FragmentManager fragmentManager = getSupportFragmentManager();
         // Se crea una transacción
@@ -179,5 +183,30 @@ public class LoginActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameLayoutLogin, loginFragment);
         //Se ejecuta la transacción
         fragmentTransaction.commit();
+    }
+
+    public void mostrarRegistroFragment () {
+        // Se obtiene una instancia de FragmentManager()
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        // Se crea una transacción
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        // Se crea una instancia del fragmento a cargar
+        RegistroFragment registroFragment = new RegistroFragment();
+        // Se añade el fragmento a la transacción indicando el contenedor en el que se va a cargar
+        fragmentTransaction.replace(R.id.frameLayoutLogin, registroFragment);
+        //Se ejecuta la transacción
+        fragmentTransaction.commit();
+    }
+
+    //Método que muestra una notificación al dar de alta un usuario
+    public void mostrarNotificacionAltaUsuario (String nombreUsuario){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_alta");
+        builder.setSmallIcon(R.drawable.warning);
+        builder.setContentTitle("Alta");
+        builder.setContentText(getString(R.string.se_ha_dado_de_alta_al_usuario) + nombreUsuario);
+        builder.setAutoCancel(true);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, builder.build());
     }
 }

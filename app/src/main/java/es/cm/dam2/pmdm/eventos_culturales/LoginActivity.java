@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private AppDatabase database;
     private MediaPlayer mediaPlayer;
     private boolean isPlaying = true;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+
+
         //Botón Login
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,20 +99,21 @@ public class LoginActivity extends AppCompatActivity {
                         //Se obtiene el rol de usuario
                         String rol = usuario.getRol();
 
-                        //Se comprueba si el usuario es admin
                         if (rol != null){
-                            if (rol.equals("admin")){
-                                //
-                            }
-                            else if (rol.equals("user")){
-                                // Se abre la aplicación
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                            else{
-                                Toast.makeText(LoginActivity.this, "El usuario no está bien creado. Consulta con el administrador", Toast.LENGTH_SHORT).show();
-                            }
+                            //Se guarda el rol en SharedPreferences
+                            sharedPreferences = getSharedPreferences("UserPrefereces", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("tipoRol", rol); // Puede ser admin o user
+                            editor.apply();
+
+                            // Se abre la aplicación
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else{
+                            Toast.makeText(LoginActivity.this, "El usuario no está bien " +
+                                    "creado. Consulta con el administrador", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
@@ -117,7 +121,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    Toast.makeText(LoginActivity.this, "Introduce tu email y la contraseña para acceder a la paliación", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Introduce tu email y la contraseña " +
+                            "para acceder a la paliación", Toast.LENGTH_SHORT).show();
                 }
             }
         });

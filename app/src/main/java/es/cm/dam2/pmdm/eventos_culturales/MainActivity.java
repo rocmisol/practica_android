@@ -6,6 +6,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -48,6 +49,7 @@ import es.cm.dam2.pmdm.eventos_culturales.Adaptadores.AdaptadorEvento;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.AppDatabase;
 import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
 import es.cm.dam2.pmdm.eventos_culturales.ui.AjustesActivity;
+import es.cm.dam2.pmdm.eventos_culturales.ui.ConfiguracionActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageButton imageButtonAjustes;
     private AppDatabase database;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -274,11 +277,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //Se agrega el menú de opciones
+    //Se agrega el menú de opciones. Será distinto en función del rol del usuario
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        sharedPreferences = getSharedPreferences("UserPrefereces", MODE_PRIVATE);
+        String tipoRol = sharedPreferences.getString("tipoRol", "user"); //POr defecto será user
+
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_opciones, menu);
+        if (tipoRol.equals("admin")){
+            inflater.inflate(R.menu.menu_opciones_admin, menu);
+        }
+        else{
+            inflater.inflate(R.menu.menu_opciones, menu);
+        }
         return true;
     }
 
@@ -292,6 +303,11 @@ public class MainActivity extends AppCompatActivity {
             ListaPasarEventosFavoritos listaPasarEventosFavoritos = new ListaPasarEventosFavoritos(listaEventosFavoritos);
             Intent intent = new Intent (MainActivity.this, FavoritosActivity.class);
             intent.putExtra("listaFavoritos", listaPasarEventosFavoritos);
+            startActivity(intent);
+            return true;
+        }
+        if (item.getItemId() == R.id.configuracion){
+            Intent intent = new Intent(MainActivity.this, ConfiguracionActivity.class);
             startActivity(intent);
             return true;
         }

@@ -1,6 +1,9 @@
 package es.cm.dam2.pmdm.eventos_culturales;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -17,29 +20,56 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.AppDatabase;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.UsuarioDao;
 import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
+import es.cm.dam2.pmdm.eventos_culturales.ui.LoginFragment;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private EditText editTextEmail, editTextPassword;
-    private Button buttonLogin;
-    private ImageButton imageButtonSound;
-    private TextView textViewRegistro;
     private UsuarioDao usuarioDao;
     private AppDatabase database;
     private MediaPlayer mediaPlayer;
     private boolean isPlaying = true;
     private SharedPreferences sharedPreferences;
 
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals("ACTUALIZAR_SONIDO")){
+                boolean activarSonido = intent.getBooleanExtra("activarSonido", true);
+                configurarSonido(activarSonido);
+            }
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_login);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.frameLayoutLogin), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        mostrarLoginFragment();
+
+
+        //Se obtienen las preferencias
         SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(this);
+        // Configuración del sonido según preferencias
+        boolean activarSonido = preferencias.getBoolean("pref_sonido", true);
+        //Configuración de modo claro/oscuro según preferencias
         boolean modoOscuro = preferencias.getBoolean("pref_tema", false);
         if (modoOscuro){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -47,95 +77,18 @@ public class LoginActivity extends AppCompatActivity {
         else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-
-
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        //Se vinculan las vistas
-        editTextEmail = findViewById(R.id.editTextEmail);
-        editTextPassword = findViewById(R.id.editTextPassword);
-        buttonLogin = findViewById(R.id.buttonLogin);
-        textViewRegistro = findViewById(R.id.textViewRegistrate);
-        imageButtonSound = findViewById(R.id.imageButtonSoundLogin);
-
-        //Se obtiene la base de datos
         database = DatabaseClient.getInstance(this);
-
-        //Se obtiene el usuarioDao
         usuarioDao = database.usuarioDao();
-
         //Se insertan usuarios iniciales en la base de datos (si está vacía)
         insertarUsuariosPredeterminados();
 
-        //Se iniciliza el MediaPlayer y se configura el audio en bucle
-        mediaPlayer = MediaPlayer.create(this, R.raw.relaxing_guitar);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.start();
+        //Se configura el sonido inicial
+        configurarSonido(activarSonido);
 
+        //Se registra el BroadcastReciver
+        registerReceiver(broadcastReceiver, new IntentFilter("ACTUALIZAR_SONIDO"));
 
-
-
-
-
-        //Botón Login
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = editTextEmail.getText().toString().trim();
-                String password = editTextPassword.getText().toString().trim();
-
-                //Se validan los campos de entrada
-                if (!email.isEmpty() && !password.isEmpty()){
-                    //Se comprueba si las credenciales con correctas
-                    Usuario usuario = usuarioDao.comprobarUsuarioRegistrado(email, password);
-                    if (usuario != null){
-                        //Se obtiene el rol de usuario
-                        String rol = usuario.getRol();
-
-                        if (rol != null){
-                            //Se guarda el rol en SharedPreferences
-                            sharedPreferences = getSharedPreferences("UserPrefereces", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("tipoRol", rol); // Puede ser admin o user
-                            editor.apply();
-
-                            // Se abre la aplicación
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else{
-                            Toast.makeText(LoginActivity.this, "El usuario no está bien " +
-                                    "creado. Consulta con el administrador", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else{
-                        Toast.makeText(LoginActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
-                    Toast.makeText(LoginActivity.this, "Introduce tu email y la contraseña " +
-                            "para acceder a la paliación", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        textViewRegistro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //LLeva a la activity RegistroActivity para que el usuario se registre
-                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        /* Lo voy a utilizar para la agenda (Pendiente modificar)
         imageButtonSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,9 +102,16 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 isPlaying = !isPlaying;
             }
-        });
+        });*/
+    }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean activarSonido = preferences.getBoolean("pref_sonido", true);
+        configurarSonido(activarSonido);
     }
 
     @Override
@@ -163,14 +123,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (mediaPlayer != null){
-            mediaPlayer.start();
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mediaPlayer != null){
@@ -178,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
             mediaPlayer.release(); // Se liberan recursos al cerrar la actividad
             mediaPlayer = null;
         }
+        unregisterReceiver(broadcastReceiver);
     }
 
     //Método que inserta dos usuarios predeterminados enla base de datos (la 1ª vez)
@@ -199,8 +152,32 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //Método para configurar el sonido
+    private void configurarSonido(boolean activarSonido){
+        if (activarSonido){
+            if (mediaPlayer == null){
+                mediaPlayer = MediaPlayer.create(this, R.raw.relaxing_guitar);
+                mediaPlayer.setLooping(true);
+            }
+            mediaPlayer.start();
+        }
+        else{
+            if (mediaPlayer != null && mediaPlayer.isPlaying()){
+                mediaPlayer.pause();
+            }
+        }
+    }
 
-
-
-
+    private void mostrarLoginFragment () {
+        // Se obtiene una instancia de FragmentManager()
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        // Se crea una transacción
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        // Se crea una instancia del fragmento a cargar
+        LoginFragment loginFragment= new LoginFragment();
+        // Se añade el fragmento a la transacción indicando el contenedor en el que se va a cargar
+        fragmentTransaction.replace(R.id.frameLayoutLogin, loginFragment);
+        //Se ejecuta la transacción
+        fragmentTransaction.commit();
+    }
 }

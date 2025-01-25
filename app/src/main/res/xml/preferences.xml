@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="AJUSTES GENERALES">
+
+
+        <CheckBoxPreference
+            android:key="pref_sonido"
+            android:title="Activar sonido"
+            android:summary="Activar sonido emergente al iniciar la apliación"
+            android:defaultValue="true"/>
+
+        <SwitchPreference
+            android:key="pref_tema"
+            android:title="Seleccionar tema"
+            android:summary="Elige entre modo Claro u Oscuro"
+            android:defaultValue="true"/>
+
+        <ListPreference
+            android:key="pref_color_letra"
+            android:title="Color de letra"
+            android:entries="@array/color_letra"
+            android:entryValues="@array/color_letra_values"
+            android:summary="Elegir el color de letra (Recomendable negro)"
+            android:defaultValue="negro"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="AJUSTES DE USUARIO">
+        <EditTextPreference
+            android:key="pref_bienvenida"
+            android:title="Mensaje de bienvenida: "
+            android:summary="Modifica tu mensaje de bienvenida"
+            android:singleLine="true"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

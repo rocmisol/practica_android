@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- Array con nombres visibles en la interfaz -->
+    <string-array name="color_letra">
+        <item>negro</item>
+        <item>rojo</item>
+        <item>naranja</item>
+        <item>azul</item>
+    </string-array>
+
+    <!-- Array con valores internos -->
+    <string-array name="color_letra_values">
+        <item>negro</item>
+        <item>rojo</item>
+        <item>naranja</item>
+        <item>azul</item>
+    </string-array>
+</resources>

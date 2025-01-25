@@ -1,6 +1,8 @@
 package es.cm.dam2.pmdm.eventos_culturales.ui;
 
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -84,8 +87,22 @@ public class ConfiguracionActivity extends AppCompatActivity {
     //Método para eliminar un usuario
     private void eliminarUsuario (Usuario usuario) {
         usuarioDao.eliminarUsuario(usuario);
+        listaUsuarios.remove(usuario);
         adaptadorUsuario.notifyDataSetChanged();
+        mostrarNotificacionBajaUsuario(usuario.getNombre());
         Toast.makeText(ConfiguracionActivity.this, R.string.usuario_eliminado,
                 Toast.LENGTH_SHORT).show();
+    }
+
+    //Método que muestra una notificación al borrar un usuario
+    public void mostrarNotificacionBajaUsuario (String nombreUsuario){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_baja");
+        builder.setSmallIcon(R.drawable.warning);
+        builder.setContentTitle("Baja");
+        builder.setContentText(getString(R.string.se_ha_dadjo_de_baja_al_susuario) + " " + nombreUsuario);
+        builder.setAutoCancel(true);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, builder.build());
     }
 }

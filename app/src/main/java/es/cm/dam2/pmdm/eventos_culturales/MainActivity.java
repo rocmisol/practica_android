@@ -437,5 +437,10 @@ public class MainActivity extends AppCompatActivity {
         notificationManager.createNotificationChannel(altaUsuarioChanel);
 
         //Canal para borrado de usuario en el sistema
+        String channelIdBajaUsuario = "channel_baja";
+        CharSequence channelNameBaja = "Notificación de baja";
+        int importanceBaja = NotificationManager.IMPORTANCE_LOW;
+        NotificationChannel bajaUsuarioChanel = new NotificationChannel(channelIdBajaUsuario, channelNameBaja, importanceBaja);
+        notificationManager.createNotificationChannel(bajaUsuarioChanel);
     }
 }

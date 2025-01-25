@@ -24,8 +24,6 @@ import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
 
 public class RegistroFragment extends Fragment {
 
-
-
     public RegistroFragment() {
         // Required empty public constructor
     }

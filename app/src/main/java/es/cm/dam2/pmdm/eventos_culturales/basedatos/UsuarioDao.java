@@ -1,9 +1,11 @@
 package es.cm.dam2.pmdm.eventos_culturales.basedatos;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
@@ -36,7 +38,11 @@ public interface UsuarioDao {
     @Query("SELECT nombre FROM usuarios ORDER BY id DESC LIMIT 1")
     String obtenerUltimoUsuario();
 
+    //Método para obtener todos los usuarios
+    @Query("SELECT * FROM usuarios WHERE rol = 'user'")
+    List<Usuario> obtenerTodosUsuariosUser();
 
-
+    @Delete
+    void eliminarUsuario(Usuario usuario);
 
 }

@@ -35,7 +35,6 @@ public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.Miview
         public ImageView itemFotoMini;
         public ImageView itemFotoFavorito;
 
-
         public MiviewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnCreateContextMenuListener(this);

@@ -2,45 +2,46 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activityConfiguracion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.ConfiguracionActivity">
 
-    <Spinner
-        android:id="@+id/spinnerTablas"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+    <TextView
+        android:id="@+id/textViewUsuariosAplicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USUARIOS DE LA APLICACIÓN:"
+        android:textColor="@color/violet2"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-
-
-    <LinearLayout
-        android:id="@+id/linearLayoutConfiguracion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewConfiguracion"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/textViewUsuariosAplicacion"
+        app:layout_constraintBottom_toTopOf="@id/buttonVolverConfiguracion"/>
 
-        <Button
-            android:id="@+id/buttonGuardarDetalle"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="@string/guardar"/>
 
-        <Button
-            android:id="@+id/buttonVolverDetalle"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:text="@string/volver"/>
+    <Button
+        android:id="@+id/buttonVolverConfiguracion"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="@string/volver"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

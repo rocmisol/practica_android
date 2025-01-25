@@ -65,12 +65,12 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
+        //Se carga el fragmento que se va a mostrar (Login)
         mostrarLoginFragment();
-
 
         //Se obtienen las preferencias
         SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(this);
-        // Configuración del sonido según preferencias
+        //Configuración del sonido según preferencias
         boolean activarSonido = preferencias.getBoolean("pref_sonido", true);
         //Configuración de modo claro/oscuro según preferencias
         boolean modoOscuro = preferencias.getBoolean("pref_tema", false);
@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+
         database = DatabaseClient.getInstance(this);
         usuarioDao = database.usuarioDao();
         //Se insertan usuarios iniciales en la base de datos (si está vacía)

@@ -44,8 +44,6 @@ public class LoginFragment extends Fragment {
     private TextView textViewRegistro;
     private UsuarioDao usuarioDao;
     private AppDatabase database;
-    private MediaPlayer mediaPlayer;
-    private boolean isPlaying = true;
     private SharedPreferences sharedPreferences;
 
     public LoginFragment() {

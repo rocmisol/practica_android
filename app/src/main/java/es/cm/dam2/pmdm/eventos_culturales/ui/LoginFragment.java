@@ -17,6 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +43,11 @@ public class LoginFragment extends Fragment {
     private EditText editTextEmail, editTextPassword;
     private Button buttonLogin;
     private ImageButton imageButtonSound;
-    private TextView textViewRegistro;
+    private TextView textViewRegistro, textViewVienvenidoLogin;
     private UsuarioDao usuarioDao;
     private AppDatabase database;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences userSharedPreferences, defaultSharedPreferences;
+
 
     public LoginFragment() {
         // Required empty public constructor
@@ -71,6 +74,7 @@ public class LoginFragment extends Fragment {
         editTextPassword = view.findViewById(R.id.editTextPassword);
         buttonLogin = view.findViewById(R.id.buttonLogin);
         textViewRegistro = view.findViewById(R.id.textViewRegistrate);
+        textViewVienvenidoLogin = view.findViewById(R.id.textViewBienvenidoLogin);
         imageButtonSound = view.findViewById(R.id.imageButtonSoundLogin);
 
         //Se obtiene la base de datos
@@ -78,6 +82,9 @@ public class LoginFragment extends Fragment {
 
         //Se obtiene el usuarioDao
         usuarioDao = database.usuarioDao();
+
+        defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        userSharedPreferences = getActivity().getSharedPreferences("UserPrefereces", MODE_PRIVATE);
 
 
 
@@ -98,15 +105,22 @@ public class LoginFragment extends Fragment {
 
                         if (rol != null){
                             //Se guarda el rol en SharedPreferences
-                            sharedPreferences = getActivity().getSharedPreferences("UserPrefereces", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            SharedPreferences.Editor editor = userSharedPreferences.edit();
                             editor.putString("tipoRol", rol); // Puede ser admin o user
                             editor.apply();
 
-                            // Se abre la aplicación
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
-                            //getActivity().finish();
+                            // Se obtiene el mensaje de bienvenida y se muestra al usuario
+                            String mensaejBienvenida = defaultSharedPreferences.getString("pref_bienvenida", "Bienvenido");
+                            textViewVienvenidoLogin.setText(mensaejBienvenida);
+
+                            // Se abre la aplicación con un retardo de un segundo
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            }, 1000);
                         }
                         else{
                             Toast.makeText(getActivity(), "El usuario no está bien " +

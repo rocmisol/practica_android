@@ -1,22 +1,18 @@
 package es.cm.dam2.pmdm.eventos_culturales;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
-import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
-import java.util.Locale;
 
 public class PreferencesFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -52,6 +48,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             configurarSonido(activarSonido);
         }
 
+        if (key.equals("pref_bienvenida")){
+            String mensajeBienvenida = sharedPreferences.getString("pref_bienvenida", "Bienvenido");
+            actualizarMensajeBienvenida(mensajeBienvenida);
+        }
+
     }
 
     private void cambiarTema(boolean modoOscuro){
@@ -60,13 +61,33 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     }
 
     private void cambiarColorLetra(String colorKey){
-        String colorLetra ="AppTheme.Color" + colorKey;
-
-        int colorID = getResources().getIdentifier(colorLetra, "style", getContext().getPackageName());
-        if (colorID != 0){
-            getActivity().setTheme(colorID);
+        if (getActivity() == null){
+            return;
         }
-        // getActivity().setTheme(R.style.AppTheme_ColorRed);
+
+        int cambiarTema;
+
+        //Si se selecciona el color negro, se aplica el tema predeterminado de Android
+        if (colorKey.equals("negro")){
+            // cambiarTema = android.R.style.Theme_DeviceDefault_Light;
+            cambiarTema = android.R.style.Theme_DeviceDefault_Light;
+
+        }
+        //Si se selecciona el color rojo, se aplica el tema con estilo rojo
+        else if (colorKey.equals("rojo")){
+            cambiarTema = R.style.AppTheme_ColorRed;
+        }
+        //Si se selecciona el color azul, se aplica el tema con estilo azul
+        else if (colorKey.equals("azul")){
+            cambiarTema = R.style.AppTheme_ColorDarkBlue;
+        }
+        else{
+            return;
+        }
+
+        getActivity().setTheme(cambiarTema);
+        getActivity().recreate();
+
     }
 
     private void configurarSonido (boolean activarSonido){
@@ -74,6 +95,12 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         Intent intent = new Intent("ACTUALIZAR_SONIDO");
         intent.putExtra("activarSonido", activarSonido);
         requireContext().sendBroadcast(intent);
+    }
+
+    private void actualizarMensajeBienvenida(String mensaje){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("pref_bienvenida", mensaje);
+        editor.apply();
     }
 
 

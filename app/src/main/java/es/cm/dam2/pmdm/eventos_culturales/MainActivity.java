@@ -44,10 +44,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import es.cm.dam2.pmdm.eventos_culturales.Adaptadores.AdaptadorEvento;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.AppDatabase;
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.EventoDao;
 import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
+import es.cm.dam2.pmdm.eventos_culturales.models.EventoEntity;
 import es.cm.dam2.pmdm.eventos_culturales.ui.AjustesActivity;
 import es.cm.dam2.pmdm.eventos_culturales.ui.ConfiguracionActivity;
 
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
     private AppDatabase database;
     private SharedPreferences sharedPreferences;
 
+    private EventoDao eventoDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,12 +92,26 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        database = DatabaseClient.getInstance(this);
+        eventoDao = database.eventoDao();
+
+        List<EventoEntity> entityList = eventoDao.obtenerTodosEventos();
         //Se rellena el ArrayList listaEventos con todos los eventos.
-        listaEventos = FuncionRelleno.rellenaEventos();
+        //listaEventos = FuncionRelleno.rellenaEventos();
+        listaEventos = new ArrayList<>();
 
-        // listaEventos = database.dao.geteventos();????
+        for (EventoEntity eventoEntity : entityList) {
+            Evento evento = new Evento (
+                    eventoEntity.getId(), eventoEntity.getNombre(), eventoEntity.getFecha(),
+                    eventoEntity.getCategoria(), eventoEntity.getImagen(), eventoEntity.getLugar(),
+                    eventoEntity.getDescripcion(), eventoEntity.getPrecio(), false, 0f, eventoEntity.getHora()
+            );
+            listaEventos.add(evento);
+        }
 
-        //en lugar de coger la lista de eventos general de la FuncionRelleno, cogerlo desde base de datos???
+
+
+
 
 
         //Vinculación del textView
@@ -154,12 +174,13 @@ public class MainActivity extends AppCompatActivity {
                             //filtrarEventos();
 
                             Evento eventoModificado = (Evento) result.getData().getSerializableExtra("eventoModificado");
-                            if (eventoModificado != null){
+                            if (eventoModificado != null) {
                                 //Bucle para buscar la posición del evento modificado
                                 for (int i = 0; i< listaEventos.size(); i++){
                                     Evento eventoBuscado = listaEventos.get(i);
                                     //Si encuentra el evento lo sustituye en la lista original
                                     if (eventoBuscado.getNombre().equalsIgnoreCase(eventoModificado.getNombre())){
+                                        //TODO actualizar USUARIO-EVENTO en base de datos??.
                                         listaEventos.set(i, eventoModificado);
                                         filtrarEventos();
                                     }
@@ -384,6 +405,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Método para obtener los eventos favoritos de la lista de eventos principal
     private void obtenerEventosFavoritos(){
+        //TODO Obtener favoritos de base de datos???.
         listaEventosFavoritos = new ArrayList<>();
         for (Evento evento : listaEventos){
             if (evento.isFavorito()){

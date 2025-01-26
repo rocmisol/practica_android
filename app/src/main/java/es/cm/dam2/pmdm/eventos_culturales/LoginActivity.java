@@ -26,15 +26,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
+import java.util.ArrayList;
+
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.AppDatabase;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
+import es.cm.dam2.pmdm.eventos_culturales.basedatos.EventoDao;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.UsuarioDao;
+import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
+import es.cm.dam2.pmdm.eventos_culturales.models.EventoEntity;
 import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
 import es.cm.dam2.pmdm.eventos_culturales.ui.LoginFragment;
 import es.cm.dam2.pmdm.eventos_culturales.ui.RegistroFragment;
 
 public class LoginActivity extends AppCompatActivity {
     private UsuarioDao usuarioDao;
+    private EventoDao eventoDao;
     private AppDatabase database;
     private MediaPlayer mediaPlayer;
     private boolean isPlaying = true;
@@ -54,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // setTheme(R.style.AppTheme_ColorRed);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
@@ -83,8 +88,10 @@ public class LoginActivity extends AppCompatActivity {
 
         database = DatabaseClient.getInstance(this);
         usuarioDao = database.usuarioDao();
+        eventoDao = database.eventoDao();
         //Se insertan usuarios iniciales en la base de datos (si está vacía)
         insertarUsuariosPredeterminados();
+        insertarEventosPredeterminados();
 
         //Se configura el sonido inicial
         configurarSonido(activarSonido);
@@ -143,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
         //Se comprueba que la base de datos está vacía
         if (usuarioDao.obtenerTodosUsuarios().isEmpty()){
             // Se crea el administrador y un usuario por defecto
-            Usuario admin = new Usuario("admin", "666111222", "admin@eventosculturales.com", "admin", "admin");
+            Usuario admin = new Usuario("admin", "666111222", "admin", "admin", "admin");
             Usuario user1 = new Usuario("usuario", "666111333", "usuario@eventosculturales.com", "usuario", "user");
 
             //Se insertan los usuarios en la base de datos
@@ -154,6 +161,30 @@ public class LoginActivity extends AppCompatActivity {
                     usuarioDao.insertar(user1);
                 }
             })).start();
+        }
+    }
+
+    //Método que inserta eventos predeterminados enla base de datos (la 1ª vez)
+    private void insertarEventosPredeterminados() {
+        //Se comprueba que la base de datos está vacía
+        if (eventoDao.obtenerTodosEventos().isEmpty()){
+            // Se cargan los eventos en la base de datos
+
+            ArrayList<Evento> eventos = FuncionRelleno.rellenaEventos();
+
+            for (Evento evento : eventos)  {
+                EventoEntity eventoEntity = new EventoEntity(evento.getNombre(),evento.getFecha(), evento.getCategoria(),
+                        evento.getImagen(), evento.getLugar(), evento.getDescripcion(),
+                        evento.getPrecio(), evento.getHora(), evento.getComentario()
+                );
+                //Se inserta el evento
+                new Thread((new Runnable() {
+                    @Override
+                    public void run() {
+                        eventoDao.insertar(eventoEntity);
+                    }
+                })).start();
+            }
         }
     }
 

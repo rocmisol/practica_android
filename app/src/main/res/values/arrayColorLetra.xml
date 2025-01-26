@@ -5,7 +5,6 @@
     <string-array name="color_letra">
         <item>negro</item>
         <item>rojo</item>
-        <item>naranja</item>
         <item>azul</item>
     </string-array>
 
@@ -13,7 +12,6 @@
     <string-array name="color_letra_values">
         <item>negro</item>
         <item>rojo</item>
-        <item>naranja</item>
         <item>azul</item>
     </string-array>
 </resources>

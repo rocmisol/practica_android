@@ -29,6 +29,7 @@
             android:key="pref_bienvenida"
             android:title="Mensaje de bienvenida: "
             android:summary="Modifica tu mensaje de bienvenida"
+            android:defaultValue="Bienvenido"
             android:singleLine="true"/>
     </PreferenceCategory>
 

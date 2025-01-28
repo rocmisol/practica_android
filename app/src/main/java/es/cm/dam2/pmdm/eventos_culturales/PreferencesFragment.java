@@ -38,9 +38,9 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             cambiarTema(modoOscuro);
         }
 
-        if (key.equals("pref_color_letra")){
-            String colorKey =sharedPreferences.getString("pref_color_letra", "negro");
-            cambiarColorLetra(colorKey);
+        if (key.equals("pref_seleccion_sonido")){
+            String sonidoInicio =sharedPreferences.getString("pref_seleccion_sonido", "magia");
+            actualizarSonidoIncio(sonidoInicio);
         }
 
         if (key.equals("pref_sonido")){
@@ -60,41 +60,17 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                 modoOscuro? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
 
-    private void cambiarColorLetra(String colorKey){
-        if (getActivity() == null){
-            return;
-        }
-
-        int cambiarTema;
-
-        //Si se selecciona el color negro, se aplica el tema predeterminado de Android
-        if (colorKey.equals("negro")){
-            // cambiarTema = android.R.style.Theme_DeviceDefault_Light;
-            cambiarTema = android.R.style.Theme_DeviceDefault_Light;
-
-        }
-        //Si se selecciona el color rojo, se aplica el tema con estilo rojo
-        else if (colorKey.equals("rojo")){
-            cambiarTema = R.style.AppTheme_ColorRed;
-        }
-        //Si se selecciona el color azul, se aplica el tema con estilo azul
-        else if (colorKey.equals("azul")){
-            cambiarTema = R.style.AppTheme_ColorDarkBlue;
-        }
-        else{
-            return;
-        }
-
-        getActivity().setTheme(cambiarTema);
-        getActivity().recreate();
-
+    private void actualizarSonidoIncio(String sonido){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("pref_seleccion_sonido", sonido);
+        editor.apply();
     }
 
     private void configurarSonido (boolean activarSonido){
         // Se envia un broadcast para notificar a LoginActivity
-        Intent intent = new Intent("ACTUALIZAR_SONIDO");
-        intent.putExtra("activarSonido", activarSonido);
-        requireContext().sendBroadcast(intent);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("pref_sonido", activarSonido);
+        editor.apply();
     }
 
     private void actualizarMensajeBienvenida(String mensaje){

@@ -16,12 +16,12 @@
             android:defaultValue="true"/>
 
         <ListPreference
-            android:key="pref_color_letra"
-            android:title="Color de letra"
-            android:entries="@array/color_letra"
-            android:entryValues="@array/color_letra_values"
-            android:summary="Elegir el color de letra (Recomendable negro)"
-            android:defaultValue="negro"/>
+            android:key="pref_seleccion_sonido"
+            android:title="Sonido de inicio"
+            android:entries="@array/sonido_inicio"
+            android:entryValues="@array/sonido_inicio_values"
+            android:summary="Elegir el sonido de inicio de la apliación"
+            android:defaultValue="magia"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="AJUSTES DE USUARIO">

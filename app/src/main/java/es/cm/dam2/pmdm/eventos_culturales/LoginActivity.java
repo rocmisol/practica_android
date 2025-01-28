@@ -47,17 +47,6 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
 
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals("ACTUALIZAR_SONIDO")){
-                boolean activarSonido = intent.getBooleanExtra("activarSonido", true);
-                configurarSonido(activarSonido);
-            }
-        }
-    };
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Se obtienen las preferencias
         SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(this);
-        //Configuración del sonido según preferencias
-        boolean activarSonido = preferencias.getBoolean("pref_sonido", true);
+
         //Configuración de modo claro/oscuro según preferencias
         boolean modoOscuro = preferencias.getBoolean("pref_tema", false);
         if (modoOscuro){
@@ -86,18 +74,15 @@ public class LoginActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
+
+
+
         database = DatabaseClient.getInstance(this);
         usuarioDao = database.usuarioDao();
         eventoDao = database.eventoDao();
         //Se insertan usuarios iniciales en la base de datos (si está vacía)
         insertarUsuariosPredeterminados();
         insertarEventosPredeterminados();
-
-        //Se configura el sonido inicial
-        configurarSonido(activarSonido);
-
-        //Se registra el BroadcastReciver
-        registerReceiver(broadcastReceiver, new IntentFilter("ACTUALIZAR_SONIDO"));
 
         /* Lo voy a utilizar para la agenda (Pendiente modificar)
         imageButtonSound.setOnClickListener(new View.OnClickListener() {
@@ -120,9 +105,17 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean activarSonido = preferences.getBoolean("pref_sonido", true);
-        configurarSonido(activarSonido);
+
+        //Se obtienen las preferencias
+        SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //Se configura el sonido inicial
+        //Configuración del sonido activado/desactivado según preferencias
+        boolean activarSonido = preferencias.getBoolean("pref_sonido", true);
+        //Configuración del tipo de sonido según preferencias
+        String sonidoSeleccionado = preferencias.getString("pref_seleccion_sonido", "magia");
+        configurarSonido(activarSonido, sonidoSeleccionado);
+
     }
 
     @Override
@@ -141,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
             mediaPlayer.release(); // Se liberan recursos al cerrar la actividad
             mediaPlayer = null;
         }
-        unregisterReceiver(broadcastReceiver);
     }
 
 
@@ -189,18 +181,30 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //Método para configurar el sonido
-    private void configurarSonido(boolean activarSonido){
-        if (activarSonido){
-            if (mediaPlayer == null){
-                mediaPlayer = MediaPlayer.create(this, R.raw.relaxing_guitar);
-                mediaPlayer.setLooping(true);
-            }
+    private void configurarSonido(boolean activarSonido, String sonidoSeleccionado){
+        if (activarSonido) {
+            int sonido = obtenerSonido(sonidoSeleccionado);
+            mediaPlayer = MediaPlayer.create(this, sonido);
             mediaPlayer.start();
         }
         else{
             if (mediaPlayer != null && mediaPlayer.isPlaying()){
                 mediaPlayer.pause();
             }
+        }
+    }
+
+    //Método para obtener el sonido seleccionado en las preferencias
+    private int obtenerSonido(String sonidoSeleccionado){
+        switch (sonidoSeleccionado){
+            case "brillo":
+                return R.raw.shine;
+            case "guitarra":
+                return R.raw.relaxing_guitar;
+            case "magia":
+                return R.raw.magic;
+            default:
+                return  R.raw.magic;
         }
     }
 

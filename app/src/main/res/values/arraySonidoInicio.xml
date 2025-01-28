@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- Array con nombres visibles en la interfaz -->
+    <string-array name="sonido_inicio">
+        <item>magia</item>
+        <item>brillo</item>
+        <item>guitarra</item>
+    </string-array>
+
+    <!-- Array con valores internos -->
+    <string-array name="sonido_inicio_values">
+        <item>magia</item>
+        <item>brillo</item>
+        <item>guitarra</item>
+    </string-array>
+</resources>

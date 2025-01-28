@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".RegistroActivity">
 
+    <ImageButton
+        android:id="@+id/imageButtonAgenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_sound_on"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/activar_o_desactivar_sonido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
         android:id="@+id/textViewRegistroRegistro"
         android:layout_width="wrap_content"

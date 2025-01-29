@@ -1,4 +1,4 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.utilidades;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import es.cm.dam2.pmdm.eventos_culturales.R;
 
 public class DialogoListaVacia extends DialogFragment implements DialogInterface.OnClickListener {
     @NonNull

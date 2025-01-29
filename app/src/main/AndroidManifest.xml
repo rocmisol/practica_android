@@ -4,7 +4,8 @@
     <!-- Este hardware no es obligatorio -->
     <uses-feature
         android:name="android.hardware.telephony"
-        android:required="false" /> <!-- Permisos necesarios -->
+        android:required="false" />
+    <!-- Permisos necesarios -->
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
@@ -28,10 +29,10 @@
             android:name=".ui.AjustesActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistroActivity"
+            android:name=".ui.RegistroActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,15 +41,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FavoritosActivity"
+            android:name=".ui.FavoritosActivity"
             android:exported="false" />
         <activity
-            android:name=".DetalleActivity"
+            android:name=".ui.DetalleActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true" /> <!-- Servicio -->
-        <service android:name=".BatteryService" />
+        <service android:name=".servicios.BatteryService" />
     </application>
 
 </manifest>

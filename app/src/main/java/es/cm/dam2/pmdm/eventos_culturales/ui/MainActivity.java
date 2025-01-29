@@ -1,4 +1,4 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.ui;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
@@ -47,13 +47,14 @@ import java.util.Calendar;
 import java.util.List;
 
 import es.cm.dam2.pmdm.eventos_culturales.Adaptadores.AdaptadorEvento;
+import es.cm.dam2.pmdm.eventos_culturales.servicios.BatteryService;
+import es.cm.dam2.pmdm.eventos_culturales.utilidades.DialogoListaVacia;
+import es.cm.dam2.pmdm.eventos_culturales.utilidades.ListaPasarEventosFavoritos;
+import es.cm.dam2.pmdm.eventos_culturales.R;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.AppDatabase;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.EventoDao;
-import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
 import es.cm.dam2.pmdm.eventos_culturales.models.EventoEntity;
-import es.cm.dam2.pmdm.eventos_culturales.ui.AjustesActivity;
-import es.cm.dam2.pmdm.eventos_culturales.ui.ConfiguracionActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -108,10 +109,6 @@ public class MainActivity extends AppCompatActivity {
             );
             listaEventos.add(evento);
         }
-
-
-
-
 
 
         //Vinculación del textView

@@ -27,11 +27,12 @@
 
     <ImageButton
         android:id="@+id/imageButtonEliminarUsuario"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:src="@drawable/papelera"
-        android:padding="10dp"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/eliminar_usuario"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    tools:context=".FavoritosActivity">
+    tools:context=".ui.FavoritosActivity">
 
     <ScrollView
         android:id="@+id/scrollViewFavoritos"

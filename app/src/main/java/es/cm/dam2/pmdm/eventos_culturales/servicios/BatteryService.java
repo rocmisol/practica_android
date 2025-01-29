@@ -1,4 +1,4 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.servicios;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import es.cm.dam2.pmdm.eventos_culturales.R;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.UsuarioDao;
 

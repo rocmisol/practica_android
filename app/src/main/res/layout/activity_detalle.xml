@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_margin="20dp"
     android:weightSum="100"
-    tools:context=".DetalleActivity">
+    tools:context=".ui.DetalleActivity">
 
     <ScrollView
         android:layout_width="match_parent"

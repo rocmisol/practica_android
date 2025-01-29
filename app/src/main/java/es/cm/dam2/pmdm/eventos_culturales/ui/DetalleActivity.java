@@ -1,4 +1,4 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.ui;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -28,7 +28,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
+import es.cm.dam2.pmdm.eventos_culturales.R;
 
 public class DetalleActivity extends AppCompatActivity {
 

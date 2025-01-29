@@ -5,9 +5,9 @@ import androidx.room.RoomDatabase;
 
 import es.cm.dam2.pmdm.eventos_culturales.models.EventoEntity;
 import es.cm.dam2.pmdm.eventos_culturales.models.FavoritoUsuarioEntity;
-import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
+import es.cm.dam2.pmdm.eventos_culturales.models.UsuarioEntity;
 
-@Database(entities = {Usuario.class, EventoEntity.class, FavoritoUsuarioEntity.class},  version = 1)
+@Database(entities = {UsuarioEntity.class, EventoEntity.class, FavoritoUsuarioEntity.class},  version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UsuarioDao usuarioDao();
     public abstract EventoDao eventoDao();

@@ -1,19 +1,10 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.ui;
 
 import android.app.NotificationManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,15 +19,14 @@ import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 
+import es.cm.dam2.pmdm.eventos_culturales.R;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.AppDatabase;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.EventoDao;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.UsuarioDao;
-import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
 import es.cm.dam2.pmdm.eventos_culturales.models.EventoEntity;
-import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
-import es.cm.dam2.pmdm.eventos_culturales.ui.LoginFragment;
-import es.cm.dam2.pmdm.eventos_culturales.ui.RegistroFragment;
+import es.cm.dam2.pmdm.eventos_culturales.models.UsuarioEntity;
+import es.cm.dam2.pmdm.eventos_culturales.utilidades.FuncionRelleno;
 
 public class LoginActivity extends AppCompatActivity {
     private UsuarioDao usuarioDao;
@@ -142,8 +132,8 @@ public class LoginActivity extends AppCompatActivity {
         //Se comprueba que la base de datos está vacía
         if (usuarioDao.obtenerTodosUsuarios().isEmpty()){
             // Se crea el administrador y un usuario por defecto
-            Usuario admin = new Usuario("admin", "666111222", "admin", "admin", "admin");
-            Usuario user1 = new Usuario("usuario", "666111333", "usuario@eventosculturales.com", "usuario", "user");
+            UsuarioEntity admin = new UsuarioEntity("admin", "666111222", "admin", "admin", "admin");
+            UsuarioEntity user1 = new UsuarioEntity("usuario", "666111333", "usuario@eventosculturales.com", "usuario", "user");
 
             //Se insertan los usuarios en la base de datos
             new Thread((new Runnable() {

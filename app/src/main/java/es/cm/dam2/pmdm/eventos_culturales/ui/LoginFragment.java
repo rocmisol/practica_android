@@ -4,21 +4,14 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,14 +21,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import es.cm.dam2.pmdm.eventos_culturales.LoginActivity;
-import es.cm.dam2.pmdm.eventos_culturales.MainActivity;
 import es.cm.dam2.pmdm.eventos_culturales.R;
-import es.cm.dam2.pmdm.eventos_culturales.RegistroActivity;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.AppDatabase;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.UsuarioDao;
-import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
+import es.cm.dam2.pmdm.eventos_culturales.models.UsuarioEntity;
 
 
 public class LoginFragment extends Fragment {
@@ -75,7 +65,6 @@ public class LoginFragment extends Fragment {
         buttonLogin = view.findViewById(R.id.buttonLogin);
         textViewRegistro = view.findViewById(R.id.textViewRegistrate);
         textViewVienvenidoLogin = view.findViewById(R.id.textViewBienvenidoLogin);
-        imageButtonSound = view.findViewById(R.id.imageButtonSoundLogin);
 
         //Se obtiene la base de datos
         database = DatabaseClient.getInstance(getActivity());
@@ -98,7 +87,7 @@ public class LoginFragment extends Fragment {
                 //Se validan los campos de entrada
                 if (!email.isEmpty() && !password.isEmpty()){
                     //Se comprueba si las credenciales con correctas
-                    Usuario usuario = usuarioDao.comprobarUsuarioRegistrado(email, password);
+                    UsuarioEntity usuario = usuarioDao.comprobarUsuarioRegistrado(email, password);
                     if (usuario != null){
                         //Se obtiene el rol de usuario
                         String rol = usuario.getRol();

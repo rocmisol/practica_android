@@ -1,4 +1,4 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.ui;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import es.cm.dam2.pmdm.eventos_culturales.Adaptadores.AdaptadorEvento;
+import es.cm.dam2.pmdm.eventos_culturales.utilidades.ListaPasarEventosFavoritos;
+import es.cm.dam2.pmdm.eventos_culturales.R;
 
 public class FavoritosActivity extends AppCompatActivity {
 

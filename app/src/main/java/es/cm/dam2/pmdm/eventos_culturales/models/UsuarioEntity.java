@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "usuarios")
-public class Usuario {
+public class UsuarioEntity {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
@@ -25,12 +25,12 @@ public class Usuario {
     public String rol;
 
     //Constructor vacío
-    public Usuario() {
+    public UsuarioEntity() {
 
     }
 
     //Constructor con parámetros
-    public Usuario(String nombre, String telefono, String email, String password, String rol) {
+    public UsuarioEntity(String nombre, String telefono, String email, String password, String rol) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
@@ -91,7 +91,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" +
+        return "UsuarioEntity{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", telefono='" + telefono + '\'' +

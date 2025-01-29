@@ -10,7 +10,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import es.cm.dam2.pmdm.eventos_culturales.PreferencesFragment;
 import es.cm.dam2.pmdm.eventos_culturales.R;
 
 public class AjustesActivity extends AppCompatActivity {

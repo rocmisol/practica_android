@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
-import es.cm.dam2.pmdm.eventos_culturales.MainActivity;
+import es.cm.dam2.pmdm.eventos_culturales.ui.Evento;
+import es.cm.dam2.pmdm.eventos_culturales.ui.MainActivity;
 import es.cm.dam2.pmdm.eventos_culturales.R;
 
 public class AdaptadorEvento extends RecyclerView.Adapter<AdaptadorEvento.MiviewHolder> {

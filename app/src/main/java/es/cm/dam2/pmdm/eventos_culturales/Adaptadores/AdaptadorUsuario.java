@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -12,25 +11,24 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import es.cm.dam2.pmdm.eventos_culturales.R;
-import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
+import es.cm.dam2.pmdm.eventos_culturales.models.UsuarioEntity;
 
 public class AdaptadorUsuario extends RecyclerView.Adapter<AdaptadorUsuario.UsuarioViewHolder> {
-    private List<Usuario> usuarios;
+    private List<UsuarioEntity> usuarios;
     private Context context;
     private int posicionSeleccionada;
     private OnUsuarioClickListener listener;
 
     //Interfaz para manejar la eliminación de ususarios
     public interface OnUsuarioClickListener {
-        void onEliminarClick (Usuario usuario);
+        void onEliminarClick (UsuarioEntity usuario);
     }
 
     //Constructor
-    public AdaptadorUsuario(List<Usuario> usuarios, Context context, OnUsuarioClickListener listener) {
+    public AdaptadorUsuario(List<UsuarioEntity> usuarios, Context context, OnUsuarioClickListener listener) {
         this.usuarios = usuarios;
         this.context = context;
         this.listener = listener;
@@ -65,7 +63,7 @@ public class AdaptadorUsuario extends RecyclerView.Adapter<AdaptadorUsuario.Usua
             holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.violet2));
         }
 
-        Usuario usuario = this.usuarios.get(position);
+        UsuarioEntity usuario = this.usuarios.get(position);
         holder.textViewItemNombreUsuario.setText(usuario.getNombre());
         holder.textViewItemEmailUsuario.setText(usuario.getEmail());
 

@@ -1,4 +1,4 @@
-package es.cm.dam2.pmdm.eventos_culturales.models;
+package es.cm.dam2.pmdm.eventos_culturales.ui;
 
 import java.io.Serializable;
 

@@ -1,13 +1,14 @@
-package es.cm.dam2.pmdm.eventos_culturales;
+package es.cm.dam2.pmdm.eventos_culturales.utilidades;
 
 import java.util.ArrayList;
 
-import es.cm.dam2.pmdm.eventos_culturales.models.Evento;
+import es.cm.dam2.pmdm.eventos_culturales.R;
+import es.cm.dam2.pmdm.eventos_culturales.ui.Evento;
 
 public class FuncionRelleno {
 
     //Método para rellenar el ArrayList Evento con todos los datos de cada uno de los eventos
-    static ArrayList<Evento> rellenaEventos() {
+    public static ArrayList<Evento> rellenaEventos() {
         String GRATUITO = "gratuito";
         ArrayList<Evento> listaEventos;
 

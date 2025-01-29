@@ -25,13 +25,13 @@ import es.cm.dam2.pmdm.eventos_culturales.R;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.AppDatabase;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.DatabaseClient;
 import es.cm.dam2.pmdm.eventos_culturales.basedatos.UsuarioDao;
-import es.cm.dam2.pmdm.eventos_culturales.models.Usuario;
+import es.cm.dam2.pmdm.eventos_culturales.models.UsuarioEntity;
 
 public class ConfiguracionActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewUsuarios;
     private AdaptadorUsuario adaptadorUsuario;
-    private List<Usuario> listaUsuarios;
+    private List<UsuarioEntity> listaUsuarios;
     private UsuarioDao usuarioDao;
     private AppDatabase database;
     private Button buttonVolverConfiguracion;
@@ -65,7 +65,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
         //Configuración del adaptador
         adaptadorUsuario = new AdaptadorUsuario(listaUsuarios, this, new AdaptadorUsuario.OnUsuarioClickListener() {
             @Override
-            public void onEliminarClick(Usuario usuario) {
+            public void onEliminarClick(UsuarioEntity usuario) {
                 eliminarUsuario(usuario);
             }
         });
@@ -85,7 +85,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
     //Método para cargar los usuario en el recycler
 
     //Método para eliminar un usuario
-    private void eliminarUsuario (Usuario usuario) {
+    private void eliminarUsuario (UsuarioEntity usuario) {
         usuarioDao.eliminarUsuario(usuario);
         listaUsuarios.remove(usuario);
         adaptadorUsuario.notifyDataSetChanged();

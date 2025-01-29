@@ -56,11 +56,10 @@
     <string name="se_ha_dado_de_alta_al_usuario">Se ha dado de alta al usuario</string>
     <string name="ajustes">Ajustes</string>
     <string name="configuracion">Configuración</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="usuario_eliminado">Usuario eliminado</string>
     <string name="eliminar_usuario">Eliminar usuario</string>
     <string name="seguro_que_deseas_eliminar_este_usuario">¿Seguro que deseas eliminar este usuario?</string>
-    <string name="se_ha_dadjo_de_baja_al_susuario">Se ha dadjo de baja al susuario</string>
+    <string name="se_ha_dadjo_de_baja_al_susuario">Se ha dado de baja al susuario</string>
     <string name="permiso_para_acceder_a_la_agenda_denegado">Permiso para acceder a la agenda denegado</string>
+    <string name="acceder_a_la_agenda_de_contactos">Acceder a la agenda de contactos</string>
 </resources>
